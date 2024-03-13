@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BakeryApp2024.Infrastructure\BakeryApp2024.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
