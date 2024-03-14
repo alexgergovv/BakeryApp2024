@@ -1,4 +1,5 @@
-﻿using BakeryApp2024.Models;
+﻿//using BakeryApp2024.Core.Models.Home;
+using BakeryApp2024.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -15,6 +16,8 @@ namespace BakeryApp2024.Controllers
 
         public IActionResult Index()
         {
+            //var model = new IndexViewModel();
+            //return View(model);
             return View();
         }
 
