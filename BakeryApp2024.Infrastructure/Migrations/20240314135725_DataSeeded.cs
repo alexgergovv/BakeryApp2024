@@ -14,8 +14,8 @@ namespace BakeryApp2024.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "b79b19b1-914b-4a3d-9a2e-d631f96e1d5e", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEEBtvaEfmBYDxnxBhKr2za8a6MoB7V+xY2zL3sjtALqpCu0CN2j7jHGUSoQ0fI6Lag==", null, false, "f0f9aea7-7b04-46bc-a876-ee533a2334c1", false, "guest@mail.com" },
-                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "91ae1c9a-8f45-414f-9cd1-09b8a84cb83d", "baker@mail.com", false, false, null, "baker@mail.com", "baker@mail.com", "AQAAAAEAACcQAAAAEJVKDWEC5IXLiTm6hGQB5zFRj9zbtpo2UYqMsKpjjHlVHeoyzkjwqPQxoyIdkJnVew==", null, false, "4a2be900-83e0-4abc-aa2b-323704cc4dcb", false, "baker@mail.com" }
+                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "15890ed2-d02d-482b-97a3-5f4e5ed77851", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEGi9mju21j1cpJJwmeOXnu4fKu3fnGDiE9333vD9jg4WtMDRuVIF9cg2I8FD0JBxAw==", null, false, "955e920c-0cd0-4fd5-ae7e-ffe1a2155f61", false, "guest@mail.com" },
+                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "75edcc3a-3d97-4c22-8e66-df34ba4b790c", "baker@mail.com", false, false, null, "baker@mail.com", "baker@mail.com", "AQAAAAEAACcQAAAAENL7W40mNEKuvZf//bvYSqsXbT7oOGuVK6V3Ns9sh2F/qASKIZf78ns7Oh1JqlLcTw==", null, false, "3363c9af-ac2d-4144-b0d6-5c821e21e43e", false, "baker@mail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -35,13 +35,13 @@ namespace BakeryApp2024.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Blogs",
-                columns: new[] { "Id", "Author", "Content", "DatePublished", "Title", "UserId" },
-                values: new object[] { 1, "Buddy Valastro", "Welcome to our bakery blog! Whether you're a seasoned baker or new to the kitchen, we've got tips, tricks, and recipes for you. From cookies to cakes, we'll guide you through baking with detailed instructions and helpful hints. Stay tuned for weekly updates, challenges, and behind-the-scenes peeks. Let's bake together and create mouthwatering desserts!", new DateTime(2024, 3, 14, 0, 11, 21, 470, DateTimeKind.Local).AddTicks(9557), "Baking Bliss: A Guide to Creating Delicious Treats in Your Own Kitchen", "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e" });
+                columns: new[] { "Id", "Author", "Content", "DatePublished", "ImageUrl", "Title", "UserId" },
+                values: new object[] { 1, "Buddy Valastro", "Welcome to our bakery blog! Whether you're a seasoned baker or new to the kitchen, we've got tips, tricks, and recipes for you. From cookies to cakes, we'll guide you through baking with detailed instructions and helpful hints. Stay tuned for weekly updates, challenges, and behind-the-scenes peeks. Let's bake together and create mouthwatering desserts!", new DateTime(2024, 3, 14, 15, 57, 24, 739, DateTimeKind.Local).AddTicks(2514), "https://www.posist.com/restaurant-times/wp-content/uploads/2016/10/A-Detailed-Guide-On-Starting-A-Bakery-Business-In-India-In-2023.jpg", "Baking Bliss: A Guide to Creating Delicious Treats in Your Own Kitchen", "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e" });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "CustomerAddress", "CustomerEmail", "CustomerName", "Date", "Number", "Price", "ProductName", "Quantity", "Status", "TotalPrice", "UserId" },
-                values: new object[] { 1, "Tsar Simeon 123\nSofia, Bulgaria\n1000", "gabrielmar284@mail.com", "Gabriel Marinov", new DateTime(2024, 3, 14, 0, 11, 21, 469, DateTimeKind.Local).AddTicks(225), 123456789, 30.00m, "Raffaello Cake", 2, "Pending", 60.00m, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e" });
+                values: new object[] { 1, "Tsar Simeon 123\nSofia, Bulgaria\n1000", "gabrielmar284@mail.com", "Gabriel Marinov", new DateTime(2024, 3, 14, 15, 57, 24, 735, DateTimeKind.Local).AddTicks(6308), 123456789, 30.00m, "Raffaello Cake", 2, "Pending", 60.00m, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e" });
 
             migrationBuilder.InsertData(
                 table: "Products",

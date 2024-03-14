@@ -91,6 +91,10 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("Publishing date");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Blog image url");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -116,7 +120,8 @@ namespace BakeryApp2024.Infrastructure.Migrations
                             Id = 1,
                             Author = "Buddy Valastro",
                             Content = "Welcome to our bakery blog! Whether you're a seasoned baker or new to the kitchen, we've got tips, tricks, and recipes for you. From cookies to cakes, we'll guide you through baking with detailed instructions and helpful hints. Stay tuned for weekly updates, challenges, and behind-the-scenes peeks. Let's bake together and create mouthwatering desserts!",
-                            DatePublished = new DateTime(2024, 3, 14, 0, 11, 21, 470, DateTimeKind.Local).AddTicks(9557),
+                            DatePublished = new DateTime(2024, 3, 14, 15, 57, 24, 739, DateTimeKind.Local).AddTicks(2514),
+                            ImageUrl = "https://www.posist.com/restaurant-times/wp-content/uploads/2016/10/A-Detailed-Guide-On-Starting-A-Bakery-Business-In-India-In-2023.jpg",
                             Title = "Baking Bliss: A Guide to Creating Delicious Treats in Your Own Kitchen",
                             UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
                         });
@@ -240,7 +245,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                             CustomerAddress = "Tsar Simeon 123\nSofia, Bulgaria\n1000",
                             CustomerEmail = "gabrielmar284@mail.com",
                             CustomerName = "Gabriel Marinov",
-                            Date = new DateTime(2024, 3, 14, 0, 11, 21, 469, DateTimeKind.Local).AddTicks(225),
+                            Date = new DateTime(2024, 3, 14, 15, 57, 24, 735, DateTimeKind.Local).AddTicks(6308),
                             Number = 123456789,
                             Price = 30.00m,
                             ProductName = "Raffaello Cake",
@@ -460,15 +465,15 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "91ae1c9a-8f45-414f-9cd1-09b8a84cb83d",
+                            ConcurrencyStamp = "75edcc3a-3d97-4c22-8e66-df34ba4b790c",
                             Email = "baker@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "baker@mail.com",
                             NormalizedUserName = "baker@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJVKDWEC5IXLiTm6hGQB5zFRj9zbtpo2UYqMsKpjjHlVHeoyzkjwqPQxoyIdkJnVew==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENL7W40mNEKuvZf//bvYSqsXbT7oOGuVK6V3Ns9sh2F/qASKIZf78ns7Oh1JqlLcTw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4a2be900-83e0-4abc-aa2b-323704cc4dcb",
+                            SecurityStamp = "3363c9af-ac2d-4144-b0d6-5c821e21e43e",
                             TwoFactorEnabled = false,
                             UserName = "baker@mail.com"
                         },
@@ -476,15 +481,15 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b79b19b1-914b-4a3d-9a2e-d631f96e1d5e",
+                            ConcurrencyStamp = "15890ed2-d02d-482b-97a3-5f4e5ed77851",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEBtvaEfmBYDxnxBhKr2za8a6MoB7V+xY2zL3sjtALqpCu0CN2j7jHGUSoQ0fI6Lag==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGi9mju21j1cpJJwmeOXnu4fKu3fnGDiE9333vD9jg4WtMDRuVIF9cg2I8FD0JBxAw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f0f9aea7-7b04-46bc-a876-ee533a2334c1",
+                            SecurityStamp = "955e920c-0cd0-4fd5-ae7e-ffe1a2155f61",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });

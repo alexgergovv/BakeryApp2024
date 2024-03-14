@@ -29,7 +29,10 @@ namespace BakeryApp2024.Infrastructure.Data.Models
         [Comment("Blog author")]
         public string Author { get; init; } = string.Empty;
 
-        [Required]
+		[Comment("Blog image url")]
+		public string? ImageUrl { get; init; } 
+
+		[Required]
         [Comment("Publishing date")]
         public DateTime DatePublished { get; init; }
 

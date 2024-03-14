@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BakeryApp2024.Infrastructure.Migrations
 {
     [DbContext(typeof(BakeryAppDbContext))]
-    [Migration("20240313220933_DomainTablesAdded")]
-    partial class DomainTablesAdded
+    [Migration("20240314135725_DataSeeded")]
+    partial class DataSeeded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,6 +57,15 @@ namespace BakeryApp2024.Infrastructure.Migrations
                     b.ToTable("Bakers");
 
                     b.HasComment("Product Baker");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Buddy Valastro",
+                            PhoneNumber = "+359562095974",
+                            UserId = "dea12856-c198-4129-b3f3-b893d8395082"
+                        });
                 });
 
             modelBuilder.Entity("BakeryApp2024.Infrastructure.Data.Models.Blog", b =>
@@ -84,6 +93,10 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("Publishing date");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Blog image url");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -102,6 +115,18 @@ namespace BakeryApp2024.Infrastructure.Migrations
                     b.ToTable("Blogs");
 
                     b.HasComment("Blog for recipes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Author = "Buddy Valastro",
+                            Content = "Welcome to our bakery blog! Whether you're a seasoned baker or new to the kitchen, we've got tips, tricks, and recipes for you. From cookies to cakes, we'll guide you through baking with detailed instructions and helpful hints. Stay tuned for weekly updates, challenges, and behind-the-scenes peeks. Let's bake together and create mouthwatering desserts!",
+                            DatePublished = new DateTime(2024, 3, 14, 15, 57, 24, 739, DateTimeKind.Local).AddTicks(2514),
+                            ImageUrl = "https://www.posist.com/restaurant-times/wp-content/uploads/2016/10/A-Detailed-Guide-On-Starting-A-Bakery-Business-In-India-In-2023.jpg",
+                            Title = "Baking Bliss: A Guide to Creating Delicious Treats in Your Own Kitchen",
+                            UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
+                        });
                 });
 
             modelBuilder.Entity("BakeryApp2024.Infrastructure.Data.Models.Category", b =>
@@ -124,6 +149,23 @@ namespace BakeryApp2024.Infrastructure.Migrations
                     b.ToTable("Categories");
 
                     b.HasComment("Product category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bread"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Pastry"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Cake"
+                        });
                 });
 
             modelBuilder.Entity("BakeryApp2024.Infrastructure.Data.Models.Order", b =>
@@ -197,6 +239,23 @@ namespace BakeryApp2024.Infrastructure.Migrations
                     b.ToTable("Orders");
 
                     b.HasComment("Products orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerAddress = "Tsar Simeon 123\nSofia, Bulgaria\n1000",
+                            CustomerEmail = "gabrielmar284@mail.com",
+                            CustomerName = "Gabriel Marinov",
+                            Date = new DateTime(2024, 3, 14, 15, 57, 24, 735, DateTimeKind.Local).AddTicks(6308),
+                            Number = 123456789,
+                            Price = 30.00m,
+                            ProductName = "Raffaello Cake",
+                            Quantity = 2,
+                            Status = "Pending",
+                            TotalPrice = 60.00m,
+                            UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
+                        });
                 });
 
             modelBuilder.Entity("BakeryApp2024.Infrastructure.Data.Models.Product", b =>
@@ -250,6 +309,41 @@ namespace BakeryApp2024.Infrastructure.Migrations
                     b.ToTable("Products");
 
                     b.HasComment("Product for sale");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AvailableQuantity = 5,
+                            BakerId = 1,
+                            CategoryId = 3,
+                            Description = "This Raffaello Cake is a coconut lover’s dream! Layers of moist and tender almond cake, coconut custard, and coconut Swiss meringue buttercream.",
+                            ImageUrl = "https://livforcake.com/wp-content/uploads/2019/04/raffaello-cake-thumb.jpg",
+                            Name = "Raffaello Cake",
+                            Price = 60.00m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AvailableQuantity = 50,
+                            BakerId = 1,
+                            CategoryId = 1,
+                            Description = "Experience our artisan bread: handcrafted with care, premium ingredients, and timeless techniques. Delight in its crispy crust, tender crumb, and exquisite flavor.",
+                            ImageUrl = "https://vegansoprano.com/wp-content/uploads/2021/01/dutch-oven-artisan-bread-7.jpg",
+                            Name = "Artisan Oven Bread",
+                            Price = 5.00m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AvailableQuantity = 20,
+                            BakerId = 1,
+                            CategoryId = 2,
+                            Description = "Savor our mascarpone puff pastry: flaky layers filled with creamy mascarpone, a buttery delight for any moment!",
+                            ImageUrl = "https://www.piesandtacos.com/wp-content/uploads/2023/02/pastries-lemon-curd-mascarpone-5-scaled.jpg",
+                            Name = "Mascarpone Puff Pastry",
+                            Price = 7.00m
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -367,6 +461,40 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "75edcc3a-3d97-4c22-8e66-df34ba4b790c",
+                            Email = "baker@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "baker@mail.com",
+                            NormalizedUserName = "baker@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAENL7W40mNEKuvZf//bvYSqsXbT7oOGuVK6V3Ns9sh2F/qASKIZf78ns7Oh1JqlLcTw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3363c9af-ac2d-4144-b0d6-5c821e21e43e",
+                            TwoFactorEnabled = false,
+                            UserName = "baker@mail.com"
+                        },
+                        new
+                        {
+                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "15890ed2-d02d-482b-97a3-5f4e5ed77851",
+                            Email = "guest@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "guest@mail.com",
+                            NormalizedUserName = "guest@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGi9mju21j1cpJJwmeOXnu4fKu3fnGDiE9333vD9jg4WtMDRuVIF9cg2I8FD0JBxAw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "955e920c-0cd0-4fd5-ae7e-ffe1a2155f61",
+                            TwoFactorEnabled = false,
+                            UserName = "guest@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

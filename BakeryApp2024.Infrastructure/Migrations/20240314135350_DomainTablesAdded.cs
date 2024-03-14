@@ -40,6 +40,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, comment: "Blog title"),
                     Content = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false, comment: "Blog content"),
                     Author = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Blog author"),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Blog image url"),
                     DatePublished = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Publishing date"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false, comment: "User identifier")
                 },
