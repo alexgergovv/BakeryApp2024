@@ -13,9 +13,13 @@ namespace BakeryApp2024.Core.Services
                 repository = _repository;
         }
 
-        public Task CreateAsync(string userId, string phoneNumber, string email)
+        public async Task CreateAsync(string userId, string phoneNumber)
         {
-            throw new NotImplementedException();
+            await repository.AddAsync(new Baker()
+            {
+                UserId = userId,
+                PhoneNumber = phoneNumber
+            });
         }
 
         public async Task<bool> ExistsByIdAsync(string userId)
@@ -24,14 +28,9 @@ namespace BakeryApp2024.Core.Services
                 .AnyAsync(b => b.UserId == userId);
         }
 
-        public Task<bool> UserWithEmailExistsAsync(string email)
+        public async Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
-        {
-            throw new NotImplementedException();
-        }
+            return await repository.AllReadOnly<Baker>()
+                .AnyAsync(b => b.PhoneNumber == phoneNumber);
     }
 }
