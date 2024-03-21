@@ -6,6 +6,7 @@ using static BakeryApp2024.Infrastructure.Constants.DataConstants;
 
 namespace BakeryApp2024.Infrastructure.Data.Models
 {
+    [Index(nameof(PhoneNumber), IsUnique = true)]
     [Comment("Product Baker")]
     public class Baker
     {

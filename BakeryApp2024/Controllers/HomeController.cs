@@ -21,7 +21,7 @@ namespace BakeryApp2024.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var model = await productService.GetThreeProducts();
+            var model = await productService.GetThreeProductsAsync();
 
             return View(model);
         }

@@ -20,7 +20,7 @@ namespace BakeryApp2024.Core.Services
 			repository = _repository;
 		}
 
-		public async Task<IEnumerable<ProductIndexServiceModel>> GetThreeProducts()
+		public async Task<IEnumerable<ProductIndexServiceModel>> GetThreeProductsAsync()
 		{
 			return await repository
 				.AllReadOnly<Product>()

@@ -9,6 +9,6 @@ namespace BakeryApp2024.Core.Contracts
 {
 	public interface IProductService
 	{
-		Task<IEnumerable<ProductIndexServiceModel>> GetThreeProducts();
+		Task<IEnumerable<ProductIndexServiceModel>> GetThreeProductsAsync();
 	}
 }

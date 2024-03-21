@@ -1,5 +1,6 @@
 ﻿using BakeryApp2024.Core.Contracts;
 using BakeryApp2024.Core.Models.Baker;
+using BakeryApp2024.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BakeryApp2024.Controllers
@@ -17,6 +18,11 @@ namespace BakeryApp2024.Controllers
         [HttpGet]
 		public async Task<IActionResult> Become()
 		{
+			if (await bakerService.ExistsByIdAsync(User.Id()))
+			{
+				return BadRequest();
+			}
+
 			var model = new BecomeBakerFormModel();
 
 			return View(model);
