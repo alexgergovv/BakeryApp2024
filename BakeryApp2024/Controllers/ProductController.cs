@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BakeryApp2024.Controllers
 {
-	[Authorize]
-	public class ProductController : Controller
+	public class ProductController : BaseController
 	{
 		[AllowAnonymous]
 		[HttpGet]

@@ -1,11 +1,12 @@
 ﻿using BakeryApp2024.Core.Contracts;
 using BakeryApp2024.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace BakeryApp2024.Controllers
 {
-	public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService productService;
@@ -17,6 +18,7 @@ namespace BakeryApp2024.Controllers
             productService = _productService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var model = await productService.GetThreeProducts();
@@ -24,7 +26,7 @@ namespace BakeryApp2024.Controllers
             return View(model);
         }
 
-
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

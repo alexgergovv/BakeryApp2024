@@ -1,13 +1,20 @@
-﻿using BakeryApp2024.Core.Models.Baker;
-using Microsoft.AspNetCore.Authorization;
+﻿using BakeryApp2024.Core.Contracts;
+using BakeryApp2024.Core.Models.Baker;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BakeryApp2024.Controllers
 {
-	[Authorize]
-	public class BakerController : Controller
+    public class BakerController : BaseController
 	{
-		[HttpGet]
+
+		private readonly IBakerService bakerService;
+
+        public BakerController(IBakerService _bakerService)
+        {
+				bakerService = _bakerService;
+        }
+
+        [HttpGet]
 		public async Task<IActionResult> Become()
 		{
 			var model = new BecomeBakerFormModel();
