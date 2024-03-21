@@ -1,4 +1,7 @@
-﻿using BakeryApp2024.Core.Models.Product;
+﻿using BakeryApp2024.Attributes;
+using BakeryApp2024.Core.Contracts;
+using BakeryApp2024.Core.Models.Product;
+using BakeryApp2024.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +9,16 @@ namespace BakeryApp2024.Controllers
 {
 	public class ProductController : BaseController
 	{
+		private readonly IProductService productService;
+
+		private readonly IBakerService bakerService;
+
+		public ProductController(IProductService _productService, IBakerService _bakerService)
+		{
+			productService = _productService;
+			bakerService = _bakerService;
+		}
+
 		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> All()
@@ -23,16 +36,38 @@ namespace BakeryApp2024.Controllers
 			return View(model);
 		}
 
+	
 		[HttpGet]
+        [MustBeBaker]
         public async Task<IActionResult> Add()
-        {
-            return View();
-        }
+		{
+			var model = new ProductFormModel()
+			{
+				Categories = await productService.AllCategoriesAsync()
+			};
+			return View(model);
+		}
 
-        [HttpPost]
+		[HttpPost]
 		public async Task<IActionResult> Add(ProductFormModel model)
 		{
-			return RedirectToAction(nameof(Details), new { id = "1" });
+			if (await productService.CategoryExistsAsync(model.CategoryId) == false)
+			{
+				ModelState.AddModelError(nameof(model.CategoryId), "");
+			}
+
+			if (ModelState.IsValid == false)
+			{
+				model.Categories = await productService.AllCategoriesAsync();
+
+				return View(model);
+			}
+
+			int? agentId = await bakerService.GetBakerIdAsync(User.Id());
+
+			int newHouseId = await productService.CreateAsync(model, agentId ?? 0);
+
+			return RedirectToAction(nameof(Details), new { id = newHouseId });
 		}
 
 		[HttpGet]

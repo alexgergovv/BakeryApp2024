@@ -31,6 +31,12 @@ namespace BakeryApp2024.Core.Services
                 .AnyAsync(b => b.UserId == userId);
         }
 
+        public async Task<int?> GetBakerIdAsync(string userId)
+        {
+			return (await repository.AllReadOnly<Baker>()
+					.FirstOrDefaultAsync(b => b.UserId == userId))?.Id;
+		}
+
         public async Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
         {
             return await repository.AllReadOnly<Baker>()

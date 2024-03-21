@@ -14,6 +14,8 @@ namespace BakeryApp2024.Infrastructure.Constants
         public const int ProductNameMaxLength = 50;
         public const int ProductDescriptionMinLength = 20;
         public const int ProductDescriptionMaxLength = 250;
+        public const string ProductPriceMaxValue = "1000";
+        public const string ProductPriceMinValue = "0";
 
         public const int BakerNameMinLength = 5;
         public const int BakerNameMaxLength = 50;

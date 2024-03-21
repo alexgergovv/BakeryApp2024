@@ -2,7 +2,7 @@
 
 namespace BakeryApp2024.Components
 {
-    public class MainMenuComponent:ViewComponent
+    public class MainMenuComponent : ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {

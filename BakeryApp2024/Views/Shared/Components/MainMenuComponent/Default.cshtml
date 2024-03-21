@@ -2,9 +2,21 @@
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="All">All Products</a>
     </li>
+
+    @if (this.User?.Identity?.IsAuthenticated ?? false)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Add">Add Product</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Mine">Orders</a>
+        </li>
+    }
+
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="All">All Blogs</a>
     </li>
+
     @if (this.User?.Identity?.IsAuthenticated ?? false)
     {
         <li class="nav-item">
@@ -13,8 +25,6 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="Liked">Liked Blogs</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Mine">Orders</a>
-        </li>
     }
+
 </ul>
