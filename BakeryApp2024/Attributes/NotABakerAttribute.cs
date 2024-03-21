@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BakeryApp2024.Attributes
 {
-    public class NotABakerAttribute : ActionFilterAttribute
+	public class NotABakerAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {

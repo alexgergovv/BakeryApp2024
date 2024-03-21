@@ -10,16 +10,19 @@ namespace BakeryApp2024.Core.Services
         private readonly IRepository repository;
         public BakerService(IRepository _repository)
         {
-                repository = _repository;
+            repository = _repository;
         }
 
-        public async Task CreateAsync(string userId, string phoneNumber)
+        public async Task CreateAsync(string userId, string name, string phoneNumber)
         {
             await repository.AddAsync(new Baker()
             {
                 UserId = userId,
+                Name = name,
                 PhoneNumber = phoneNumber
             });
+
+            await repository.SaveChangesAsync();
         }
 
         public async Task<bool> ExistsByIdAsync(string userId)
@@ -32,5 +35,6 @@ namespace BakeryApp2024.Core.Services
         {
             return await repository.AllReadOnly<Baker>()
                 .AnyAsync(b => b.PhoneNumber == phoneNumber);
+        }
     }
 }
