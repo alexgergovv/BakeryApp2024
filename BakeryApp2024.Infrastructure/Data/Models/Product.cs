@@ -32,10 +32,6 @@ namespace BakeryApp2024.Infrastructure.Data.Models
         public decimal Price { get; init; }
 
         [Required]
-        [Comment("Available quantity")]
-        public int AvailableQuantity { get; init; }
-
-        [Required]
         [Comment("Category identifier")]
         public int CategoryId { get; set; }
 

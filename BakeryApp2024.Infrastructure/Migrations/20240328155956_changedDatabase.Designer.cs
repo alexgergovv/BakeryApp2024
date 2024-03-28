@@ -4,6 +4,7 @@ using BakeryApp2024.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BakeryApp2024.Infrastructure.Migrations
 {
     [DbContext(typeof(BakeryAppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240328155956_changedDatabase")]
+    partial class changedDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,7 +125,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                             Id = 1,
                             Author = "Buddy Valastro",
                             Content = "Welcome to our bakery blog! Whether you're a seasoned baker or new to the kitchen, we've got tips, tricks, and recipes for you. From cookies to cakes, we'll guide you through baking with detailed instructions and helpful hints. Stay tuned for weekly updates, challenges, and behind-the-scenes peeks. Let's bake together and create mouthwatering desserts!",
-                            DatePublished = new DateTime(2024, 3, 28, 19, 46, 16, 213, DateTimeKind.Local).AddTicks(8422),
+                            DatePublished = new DateTime(2024, 3, 28, 17, 59, 55, 812, DateTimeKind.Local).AddTicks(2149),
                             ImageUrl = "https://www.posist.com/restaurant-times/wp-content/uploads/2016/10/A-Detailed-Guide-On-Starting-A-Bakery-Business-In-India-In-2023.jpg",
                             Title = "Baking Bliss: A Guide to Creating Delicious Treats in Your Own Kitchen",
                             UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
@@ -248,7 +250,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                             CustomerAddress = "Tsar Simeon 123\nSofia, Bulgaria\n1000",
                             CustomerEmail = "gabrielmar284@mail.com",
                             CustomerName = "Gabriel Marinov",
-                            Date = new DateTime(2024, 3, 28, 19, 46, 16, 210, DateTimeKind.Local).AddTicks(3515),
+                            Date = new DateTime(2024, 3, 28, 17, 59, 55, 808, DateTimeKind.Local).AddTicks(8901),
                             Number = 123456789,
                             Price = 30.00m,
                             ProductName = "Raffaello Cake",
@@ -324,7 +326,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                             BakerId = 1,
                             CategoryId = 1,
                             Description = "Experience our artisan bread: handcrafted with care, premium ingredients, and timeless techniques. Delight in its crispy crust, tender crumb, and exquisite flavor.",
-                            ImageUrl = "https://www.kitchensanctuary.com/wp-content/uploads/2020/06/Artisan-Bread-square-FS-46.jpg",
+                            ImageUrl = "https://vegansoprano.com/wp-content/uploads/2021/01/dutch-oven-artisan-bread-7.jpg",
                             Name = "Artisan Oven Bread",
                             Price = 5.00m
                         },
@@ -334,7 +336,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                             BakerId = 1,
                             CategoryId = 2,
                             Description = "Savor our mascarpone puff pastry: flaky layers filled with creamy mascarpone, a buttery delight for any moment!",
-                            ImageUrl = "https://www.californiastrawberries.com/wp-content/uploads/2021/04/Strawberry-Mascarpone-Danishes.png",
+                            ImageUrl = "https://www.piesandtacos.com/wp-content/uploads/2023/02/pastries-lemon-curd-mascarpone-5-scaled.jpg",
                             Name = "Mascarpone Puff Pastry",
                             Price = 7.00m
                         });
@@ -461,15 +463,15 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "08473922-194e-4799-b435-1fa65abae4e3",
+                            ConcurrencyStamp = "6fb784bb-5ca4-4509-9a01-32f1cf8048af",
                             Email = "baker@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "baker@mail.com",
                             NormalizedUserName = "baker@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH8V7xn95vk1T5kzazFsldU2U8lfenHtRlA2GZIcwycjPREMzRRvxjlnAsU2rfrUZQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGGsvhqvKf//3TEhcISWvOhMVxu1MIFT5FxPDNneca4GNn7WdvFD5il6Vr/9yooW2w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1891d1f3-9712-426b-a59b-9f92de411fa1",
+                            SecurityStamp = "9c02d95a-adf9-4de0-9d09-0ecc3a94d657",
                             TwoFactorEnabled = false,
                             UserName = "baker@mail.com"
                         },
@@ -477,15 +479,15 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc3e9e22-2abf-48e4-b5f8-56dbf9a9659f",
+                            ConcurrencyStamp = "9e22c317-82b2-49f8-9425-3d039ae16341",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBCafUn4bpqniVAo3gcjxZzNYjriFwJB48XbEfSbB3UA+8JQotv+0XVbbalvyonggQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK1ifqmt5zbULObpBp5Lf+KryTe+a+YQ0UJhioRRIdvBxtkj0MfuFqr4i2z1iUkYcg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ea337cc7-46a2-443a-b8b3-2f418c386fd5",
+                            SecurityStamp = "20a121fe-f58c-4ef3-9b63-880e251f90a4",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });

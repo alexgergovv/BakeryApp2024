@@ -36,12 +36,7 @@ namespace BakeryApp2024.Core.Models.Product
 			ProductPriceMaxValue,
 			ConvertValueInInvariantCulture = true,
 			ErrorMessage = "Product price must be a positive number and less than {2} dollars")]
-		[Display(Name = "Price")]
 		public decimal Price { get; init; }
-
-		[Required(ErrorMessage = RequiredMessage)]
-		[Display(Name = "Available Quantity")]
-		public int AvailableQuantity { get; init; }
 
 		[Display(Name = "Category")]
 		public int CategoryId { get; set; }

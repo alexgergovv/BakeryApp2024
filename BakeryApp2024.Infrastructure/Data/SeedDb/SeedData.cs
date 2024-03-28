@@ -99,8 +99,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
                 ImageUrl = "https://livforcake.com/wp-content/uploads/2019/04/raffaello-cake-thumb.jpg",
                 Price = 60.00M,
                 CategoryId = CakeCategory.Id,
-                BakerId = Baker.Id,
-                AvailableQuantity = 5
+                BakerId = Baker.Id
             };
 
             ArtisanBread = new Product()
@@ -108,11 +107,10 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
                 Id = 2,
                 Name = "Artisan Oven Bread",
                 Description = "Experience our artisan bread: handcrafted with care, premium ingredients, and timeless techniques. Delight in its crispy crust, tender crumb, and exquisite flavor.",
-                ImageUrl = "https://vegansoprano.com/wp-content/uploads/2021/01/dutch-oven-artisan-bread-7.jpg",
+                ImageUrl = "https://www.kitchensanctuary.com/wp-content/uploads/2020/06/Artisan-Bread-square-FS-46.jpg",
                 Price = 5.00M,
                 CategoryId = BreadCategory.Id,
-                BakerId = Baker.Id,
-                AvailableQuantity = 50
+                BakerId = Baker.Id
             };
 
             MascarponePastry = new Product()
@@ -120,11 +118,10 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
                 Id = 3,
                 Name = "Mascarpone Puff Pastry",
                 Description = "Savor our mascarpone puff pastry: flaky layers filled with creamy mascarpone, a buttery delight for any moment!",
-                ImageUrl = "https://www.piesandtacos.com/wp-content/uploads/2023/02/pastries-lemon-curd-mascarpone-5-scaled.jpg",
+                ImageUrl = "https://www.californiastrawberries.com/wp-content/uploads/2021/04/Strawberry-Mascarpone-Danishes.png",
                 Price = 7.00M,
                 CategoryId = PastryCategory.Id,
-                BakerId = Baker.Id,
-                AvailableQuantity = 20
+                BakerId = Baker.Id
             };
         }
         private void SeedOrder()
