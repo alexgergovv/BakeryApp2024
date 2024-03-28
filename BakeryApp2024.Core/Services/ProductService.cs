@@ -48,15 +48,8 @@ namespace BakeryApp2024.Core.Services
 			var products = await productsToShow
 				.Skip((currentPage - 1) * productsPerPage)
 				.Take(productsPerPage)
-				.Select(p => new ProductServiceModel()
-				{
-					Id = p.Id,
-					Name = p.Name,
-					Description = p.Description,
-					ImageUrl = p.ImageUrl,
-					Price = p.Price
-				})
-				.ToListAsync();
+				.ProjectToProductServiceModel()
+                .ToListAsync();
 
 			int totalProducts = await productsToShow.CountAsync();
 
@@ -110,6 +103,13 @@ namespace BakeryApp2024.Core.Services
 			return product.Id;
 		}
 
+        public async Task<bool> ExistsAsync(int id)
+        {
+            return await repository
+				.AllReadOnly<Product>()
+				.AnyAsync(p => p.Id == id);
+        }
+
         public async Task<IEnumerable<ProductIndexServiceModel>> GetThreeProductsAsync()
 		{
 			return await repository
@@ -122,6 +122,27 @@ namespace BakeryApp2024.Core.Services
 					ImageUrl = p.ImageUrl,
 				})
 				.ToListAsync();
-		} 
-	}
+		}
+
+        public async Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id)
+        {
+			return await repository.AllReadOnly<Product>()
+				 .Where(p => p.Id == id)
+				 .Select(p => new ProductDetailsServiceModel()
+				 {
+					 Id = id,
+					 Name = p.Name,
+					 ImageUrl = p.ImageUrl,
+					 Price = p.Price,
+					 Baker = new Models.Baker.BakerServiceModel()
+					 {
+						 PhoneNumber = p.Baker.PhoneNumber,
+						 Email = p.Baker.User.Email
+					 },
+					 Category = p.Category.Name,
+					 Description = p.Description
+				 })
+				 .FirstAsync();
+        }
+    }
 }

@@ -41,13 +41,26 @@ namespace BakeryApp2024.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Details(int id)
 		{
-			var model = new ProductDetailsViewModel();
+			if (await productService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			var model = await productService.ProductDetailsByIdAsync(id);
 
 			return View(model);
 		}
 
-	
-		[HttpGet]
+
+
+        //[HttpPost]
+        //public async Task<IActionResult> Buy(int Id)
+        //{
+        //	return RedirectToAction(nameof(OrderController.Mine), "Order");
+        //}
+
+
+        [HttpGet]
         [MustBeBaker]
         public async Task<IActionResult> Add()
 		{
@@ -55,14 +68,9 @@ namespace BakeryApp2024.Controllers
 			{
 				Categories = await productService.AllCategoriesAsync()
 			};
+
 			return View(model);
 		}
-
-		//[HttpPost]
-		//public async Task<IActionResult> Buy(int Id)
-		//{
-		//	return RedirectToAction(nameof(OrderController.Mine), "Order");
-		//}
 
 		[HttpPost]
 		public async Task<IActionResult> Add(ProductFormModel model)
@@ -104,13 +112,13 @@ namespace BakeryApp2024.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Delete(int id)
 		{
-			var model = new ProductDetailsViewModel();
+			var model = new ProductDetailsServiceModel();
 
 			return View(model);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Delete(ProductDetailsViewModel model)
+		public async Task<IActionResult> Delete(ProductDetailsServiceModel model)
 		{
 			return RedirectToAction(nameof(Details), new { id = "1" });
 		}

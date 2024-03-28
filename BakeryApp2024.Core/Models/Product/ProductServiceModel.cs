@@ -15,12 +15,6 @@ namespace BakeryApp2024.Core.Models.Product
         public string Name { get; init; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
-        [StringLength(ProductDescriptionMaxLength,
-            MinimumLength = ProductDescriptionMinLength,
-            ErrorMessage = LengthMessage)]
-        public string Description { get; init; } = string.Empty;
-
-        [Required(ErrorMessage = RequiredMessage)]
         [Display(Name = "Image URL")]
         public string ImageUrl { get; init; } = string.Empty;
 

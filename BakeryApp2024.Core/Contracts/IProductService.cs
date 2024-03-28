@@ -22,5 +22,9 @@ namespace BakeryApp2024.Core.Contracts
 			int productsPerPage = 3);
 
 		Task<IEnumerable<string>> AllCategoriesNamesAsync();
+
+		Task<bool> ExistsAsync(int id);
+
+		Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id);	
 	}
 }
