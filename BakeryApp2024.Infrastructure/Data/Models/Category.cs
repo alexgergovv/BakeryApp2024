@@ -9,13 +9,13 @@ namespace BakeryApp2024.Infrastructure.Data.Models
     {
         [Key]
         [Comment("Category identifier")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(CategoryNameMaxLength)]
         [Comment("Category name")]
-        public string Name { get; init; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
-        public List<Product> Products { get; init; } = new List<Product>();
+        public List<Product> Products { get; set; } = new List<Product>();
     }
 }

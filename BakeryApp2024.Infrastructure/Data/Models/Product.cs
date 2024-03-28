@@ -10,26 +10,26 @@ namespace BakeryApp2024.Infrastructure.Data.Models
     {
         [Key]
         [Comment("Product identifier")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(ProductNameMaxLength)]
         [Comment("Product name")]
-        public string Name { get; init; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(ProductDescriptionMaxLength)]
         [Comment("Product description")]
-        public string Description {  get; init; } = string.Empty;
+        public string Description {  get; set; } = string.Empty;
 
         [Required]
         [Comment("Product image url")]
-        public string ImageUrl { get; init; } = string.Empty;
+        public string ImageUrl { get; set; } = string.Empty;
 
         [Required]
         [Comment("Product price")]
         [Column(TypeName = "decimal(18, 2)")]
-        public decimal Price { get; init; }
+        public decimal Price { get; set; }
 
         [Required]
         [Comment("Category identifier")]

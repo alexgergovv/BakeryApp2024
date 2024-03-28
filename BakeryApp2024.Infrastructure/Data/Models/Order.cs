@@ -11,60 +11,60 @@ namespace BakeryApp2024.Infrastructure.Data.Models
     {
         [Key]
         [Comment("Order identifier")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [Required]
         [Comment("Order number")]
-        public int Number { get; init; }
+        public int Number { get; set; }
 
         [Required]
         [MaxLength(ProductNameMaxLength)]
         [Comment("Product name")]
-        public string ProductName { get; init; } = string.Empty;
+        public string ProductName { get; set; } = string.Empty;
 
         [Required]
         [Comment("Products quantity")]
-        public int Quantity { get; init; }
+        public int Quantity { get; set; }
 
         [Required]
         [Comment("Product price")]
         [Column(TypeName = "decimal(18, 2)")]
-        public decimal Price { get; init; } 
+        public decimal Price { get; set; } 
 
         [Required]
         [MaxLength(OrderCustomerNameMaxLength)]
         [Comment("Customer name")]
-        public string CustomerName { get; init; } = string.Empty;
+        public string CustomerName { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(OrderCustomerAddressMaxLength)]
         [Comment("Customer address")]
-        public string CustomerAddress { get; init; } = string.Empty;
+        public string CustomerAddress { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(OrderCustomerEmailMaxLength)]
         [Comment("Customer email")]
-        public string CustomerEmail { get; init; } = string.Empty;
+        public string CustomerEmail { get; set; } = string.Empty;
 
         [Required]
         [Comment("Total price")]
         [Column(TypeName = "decimal(18, 2)")]
-        public decimal TotalPrice { get; init; }
+        public decimal TotalPrice { get; set; }
 
         [Required]
         [Comment("Order date")]
-        public DateTime Date { get; init; }
+        public DateTime Date { get; set; }
 
         [Required]
         [MaxLength(OrderStatusMaxLength)]
         [Comment("Order status")]
-        public string Status { get; init; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
 
         [Required]
         [Comment("User identifier")]
-        public string UserId { get; init; } = string.Empty;
+        public string UserId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; init; } = null!;
+        public IdentityUser User { get; set; } = null!;
     }
 }

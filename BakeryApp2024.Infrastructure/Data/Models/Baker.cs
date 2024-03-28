@@ -12,24 +12,24 @@ namespace BakeryApp2024.Infrastructure.Data.Models
     {
         [Key]
         [Comment("Baker identifier")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(BakerNameMaxLength)]
         [Comment("Baker name")]
-        public string Name { get; init; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(BakerPhoneNumberMaxLength)]
         [Comment("Baker's phone number")]
-        public string PhoneNumber { get; init; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
 
         [Required]
         [Comment("User identifier")]
-        public string UserId { get; init; } = string.Empty;
+        public string UserId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; init; } = null!;
+        public IdentityUser User { get; set; } = null!;
 
         public List<Product> Products { get; set; } = new List<Product>();
     }

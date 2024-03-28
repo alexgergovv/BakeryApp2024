@@ -103,14 +103,52 @@ namespace BakeryApp2024.Core.Services
 			return product.Id;
 		}
 
-        public async Task<bool> ExistsAsync(int id)
+		public async Task EditAsync(int productId, ProductFormModel model)
+		{
+			var product = await repository.GetByIdAsync<Product>(productId);
+
+			if (product != null)
+			{
+				product.Name = model.Name;
+				product.Description = model.Description;
+				product.ImageUrl = model.ImageUrl;
+				product.Price = model.Price;
+				product.CategoryId = model.CategoryId;
+
+				await repository.SaveChangesAsync();
+			}
+		}
+
+		public async Task<bool> ExistsAsync(int id)
         {
             return await repository
 				.AllReadOnly<Product>()
 				.AnyAsync(p => p.Id == id);
         }
 
-        public async Task<IEnumerable<ProductIndexServiceModel>> GetThreeProductsAsync()
+		public async Task<ProductFormModel?> GetProductFormModelByIdAsync(int id)
+		{
+			var product = await repository.AllReadOnly<Product>()
+				.Where(p => p.Id == id)
+				.Select(p => new ProductFormModel()
+				{
+					Name = p.Name,
+					Description = p.Description,
+					ImageUrl = p.ImageUrl,
+					Price = p.Price,
+					CategoryId = p.CategoryId
+				})
+				.FirstOrDefaultAsync();
+
+			if (product != null)
+			{
+				product.Categories = await AllCategoriesAsync();
+			}
+
+			return product;
+		}
+
+		public async Task<IEnumerable<ProductIndexServiceModel>> GetThreeProductsAsync()
 		{
 			return await repository
 				.AllReadOnly<Product>()
@@ -124,7 +162,13 @@ namespace BakeryApp2024.Core.Services
 				.ToListAsync();
 		}
 
-        public async Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id)
+		public async Task<bool> HasBakerWithIdAsync(int productId, string userId)
+		{
+			return await repository.AllReadOnly<Product>()
+				.AnyAsync(p => p.Id == productId && p.Baker.UserId == userId);
+		}
+
+		public async Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id)
         {
 			return await repository.AllReadOnly<Product>()
 				 .Where(p => p.Id == id)

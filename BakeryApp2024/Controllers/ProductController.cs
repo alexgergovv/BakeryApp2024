@@ -21,7 +21,7 @@ namespace BakeryApp2024.Controllers
 
 		[AllowAnonymous]
 		[HttpGet]
-		public async Task<IActionResult> All([FromQuery]AllProductsQueryModel model)
+		public async Task<IActionResult> All([FromQuery] AllProductsQueryModel model)
 		{
 			var products = await productService.AllAsync(
 				model.Category,
@@ -53,16 +53,16 @@ namespace BakeryApp2024.Controllers
 
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> Buy(int Id)
-        //{
-        //	return RedirectToAction(nameof(OrderController.Mine), "Order");
-        //}
+		//[HttpPost]
+		//public async Task<IActionResult> Buy(int Id)
+		//{
+		//	return RedirectToAction(nameof(OrderController.Mine), "Order");
+		//}
 
 
-        [HttpGet]
-        [MustBeBaker]
-        public async Task<IActionResult> Add()
+		[HttpGet]
+		[MustBeBaker]
+		public async Task<IActionResult> Add()
 		{
 			var model = new ProductFormModel()
 			{
@@ -77,7 +77,7 @@ namespace BakeryApp2024.Controllers
 		{
 			if (await productService.CategoryExistsAsync(model.CategoryId) == false)
 			{
-				ModelState.AddModelError(nameof(model.CategoryId), "");
+				ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
 			}
 
 			if (ModelState.IsValid == false)
@@ -97,7 +97,17 @@ namespace BakeryApp2024.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Edit(int id)
 		{
-			var model = new ProductFormModel();
+			if (await productService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await productService.HasBakerWithIdAsync(id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+			var model = await productService.GetProductFormModelByIdAsync(id);
 
 			return View(model);
 		}
@@ -105,7 +115,31 @@ namespace BakeryApp2024.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit(int id, ProductFormModel model)
 		{
-			return RedirectToAction(nameof(Details), new { id = "1" });
+			if (await productService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await productService.HasBakerWithIdAsync(id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+			if (await productService.CategoryExistsAsync(model.CategoryId) == false)
+			{
+				ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
+			}
+
+			if (ModelState.IsValid == false)
+			{
+				model.Categories = await productService.AllCategoriesAsync();
+
+				return View(model);
+			}
+
+			await productService.EditAsync(id, model);
+
+			return RedirectToAction(nameof(Details), new { id });
 		}
 
 
