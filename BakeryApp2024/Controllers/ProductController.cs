@@ -21,9 +21,19 @@ namespace BakeryApp2024.Controllers
 
 		[AllowAnonymous]
 		[HttpGet]
-		public async Task<IActionResult> All()
+		public async Task<IActionResult> All([FromQuery]AllProductsQueryModel model)
 		{
-			var model = new AllProductsQueryModel();
+			var products = await productService.AllAsync(
+				model.Category,
+				model.SearchTerm,
+				model.Sorting,
+				model.CurrentPage,
+				model.ProductsPerPage
+				);
+
+			model.TotalProductsCount = products.TotalProductsCount;
+			model.Products = products.Products;
+			model.Categories = await productService.AllCategoriesNamesAsync();
 
 			return View(model);
 		}
@@ -47,6 +57,12 @@ namespace BakeryApp2024.Controllers
 			};
 			return View(model);
 		}
+
+		//[HttpPost]
+		//public async Task<IActionResult> Buy(int Id)
+		//{
+		//	return RedirectToAction(nameof(OrderController.Mine), "Order");
+		//}
 
 		[HttpPost]
 		public async Task<IActionResult> Add(ProductFormModel model)
@@ -97,12 +113,6 @@ namespace BakeryApp2024.Controllers
 		public async Task<IActionResult> Delete(ProductDetailsViewModel model)
 		{
 			return RedirectToAction(nameof(Details), new { id = "1" });
-		}
-
-		[HttpPost]
-		public async Task<IActionResult> Buy(int id)
-		{
-			return RedirectToAction(nameof(OrderController.Mine), "Order");
 		}
 	}
 }

@@ -1,26 +1,71 @@
 ﻿using BakeryApp2024.Core.Contracts;
+using BakeryApp2024.Core.Enumerations;
 using BakeryApp2024.Core.Models.Home;
 using BakeryApp2024.Core.Models.Product;
 using BakeryApp2024.Infrastructure.Data.Common;
 using BakeryApp2024.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BakeryApp2024.Core.Services
 {
-	public class ProductService : IProductService
+    public class ProductService : IProductService
 	{
 		private readonly IRepository repository;
 		public ProductService(IRepository _repository)
 		{
 			repository = _repository;
 		}
+
+        public async Task<ProductQueryServiceModel> AllAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.NameAlphabetically, int currentPage = 1, int productsPerPage = 3)
+        {
+			var productsToShow = repository.AllReadOnly<Product>();
+
+			if (category != null)
+			{
+				productsToShow = productsToShow
+					.Where(p => p.Category.Name == category);
+			}
+
+			if (searchTerm != null)
+			{
+				productsToShow = productsToShow
+					.Where(p => p.Name.ToLower().Contains(searchTerm.ToLower()) ||
+					p.Description.ToLower().Contains(searchTerm.ToLower()));
+			}
+
+			productsToShow = sorting switch
+			{
+				ProductSorting.NameAlphabetically => productsToShow
+				.OrderBy(p => p.Name),
+				ProductSorting.PriceAscending => productsToShow
+				.OrderBy(p => p.Price),
+				ProductSorting.PriceDescending => productsToShow
+				.OrderByDescending(p => p.Price),
+				_ => productsToShow
+				.OrderByDescending(p => p.Id)
+			};
+
+			var products = await productsToShow
+				.Skip((currentPage - 1) * productsPerPage)
+				.Take(productsPerPage)
+				.Select(p => new ProductServiceModel()
+				{
+					Id = p.Id,
+					Name = p.Name,
+					Description = p.Description,
+					ImageUrl = p.ImageUrl,
+					Price = p.Price
+				})
+				.ToListAsync();
+
+			int totalProducts = await productsToShow.CountAsync();
+
+			return new ProductQueryServiceModel()
+			{
+				TotalProductsCount = totalProducts,	
+				Products = products
+			};
+        }
 
         public async Task<IEnumerable<ProductCategoryServiceModel>> AllCategoriesAsync()
         {
@@ -32,6 +77,14 @@ namespace BakeryApp2024.Core.Services
 			  })
 			  .ToListAsync();
 		}
+
+        public async Task<IEnumerable<string>> AllCategoriesNamesAsync()
+        {
+            return await repository.AllReadOnly<Category>()
+				.Select(c => c.Name)
+				.Distinct()
+				.ToListAsync();
+        }
 
         public async Task<bool> CategoryExistsAsync(int categoryId)
         {
@@ -47,7 +100,6 @@ namespace BakeryApp2024.Core.Services
 				Description = model.Description,
 				ImageUrl = model.ImageUrl,
 				Price = model.Price,
-				AvailableQuantity = model.AvailableQuantity,
 				CategoryId = model.CategoryId,
 				BakerId = bakerId,
 			};

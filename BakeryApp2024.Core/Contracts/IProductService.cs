@@ -1,4 +1,5 @@
-﻿using BakeryApp2024.Core.Models.Home;
+﻿using BakeryApp2024.Core.Enumerations;
+using BakeryApp2024.Core.Models.Home;
 using BakeryApp2024.Core.Models.Product;
 
 namespace BakeryApp2024.Core.Contracts
@@ -12,5 +13,14 @@ namespace BakeryApp2024.Core.Contracts
 		Task<bool> CategoryExistsAsync(int categoryId);
 
 		Task<int> CreateAsync(ProductFormModel model, int bakerId);
+
+		Task<ProductQueryServiceModel> AllAsync(
+			string? category = null,
+			string? searchTerm = null,
+			ProductSorting sorting = ProductSorting.NameAlphabetically,
+			int currentPage = 1,
+			int productsPerPage = 3);
+
+		Task<IEnumerable<string>> AllCategoriesNamesAsync();
 	}
 }
