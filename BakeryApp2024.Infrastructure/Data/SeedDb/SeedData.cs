@@ -24,7 +24,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
             SeedBaker();
             SeedCategories();
             SeedProducts();
-            SeedOrder();
+            //SeedOrder();
             SeedBlog();
         }
 
@@ -124,24 +124,21 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
                 BakerId = Baker.Id
             };
         }
-        private void SeedOrder()
-        {
-            GuestUserOrder = new Order()
-            {
-                Id = 1,
-                Number = 123456789,
-                ProductName = "Raffaello Cake",
-                Quantity = 2,
-                Price = 30.00M,
-                TotalPrice = 60.00M,
-                CustomerName = "Gabriel Marinov",
-                CustomerAddress = "Tsar Simeon 123\nSofia, Bulgaria\n1000",
-                CustomerEmail = "gabrielmar284@mail.com",
-                Date = DateTime.Now,
-                Status = "Pending",
-                UserId = GuestUser.Id
-            };
-        }
+        //private void SeedOrder()
+        //{
+        //    GuestUserOrder = new Order()
+        //    {
+        //        Id = 1,
+        //        Number = 123456789,
+        //        TotalPrice = 60.00M,
+        //        CustomerName = "Gabriel Marinov",
+        //        CustomerAddress = "Tsar Simeon 123\nSofia, Bulgaria\n1000",
+        //        CustomerEmail = "gabrielmar284@mail.com",
+        //        Date = DateTime.Now,
+        //        Status = "Pending",
+        //        UserId = GuestUser.Id
+        //    };
+        //}
 
         private void SeedBlog()
         {

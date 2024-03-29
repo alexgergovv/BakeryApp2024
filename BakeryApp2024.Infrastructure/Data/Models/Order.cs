@@ -18,20 +18,6 @@ namespace BakeryApp2024.Infrastructure.Data.Models
         public int Number { get; set; }
 
         [Required]
-        [MaxLength(ProductNameMaxLength)]
-        [Comment("Product name")]
-        public string ProductName { get; set; } = string.Empty;
-
-        [Required]
-        [Comment("Products quantity")]
-        public int Quantity { get; set; }
-
-        [Required]
-        [Comment("Product price")]
-        [Column(TypeName = "decimal(18, 2)")]
-        public decimal Price { get; set; } 
-
-        [Required]
         [MaxLength(OrderCustomerNameMaxLength)]
         [Comment("Customer name")]
         public string CustomerName { get; set; } = string.Empty;
@@ -64,7 +50,9 @@ namespace BakeryApp2024.Infrastructure.Data.Models
         [Comment("User identifier")]
         public string UserId { get; set; } = string.Empty;
 
+
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; } = null!;
+        public IEnumerable<BasketItem> BasketItems { get; set; } = new List<BasketItem>();
     }
 }
