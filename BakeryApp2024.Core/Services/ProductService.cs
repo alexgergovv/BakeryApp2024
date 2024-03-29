@@ -103,7 +103,13 @@ namespace BakeryApp2024.Core.Services
 			return product.Id;
 		}
 
-		public async Task EditAsync(int productId, ProductFormModel model)
+        public async Task DeleteAsync(int productId)
+        {
+			await repository.DeleteAsync<Product>(productId);
+			await repository.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(int productId, ProductFormModel model)
 		{
 			var product = await repository.GetByIdAsync<Product>(productId);
 

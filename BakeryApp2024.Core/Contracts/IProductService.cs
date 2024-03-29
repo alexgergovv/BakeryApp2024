@@ -32,5 +32,7 @@ namespace BakeryApp2024.Core.Contracts
 		Task<bool> HasBakerWithIdAsync(int productId, string userId);
 
 		Task<ProductFormModel?> GetProductFormModelByIdAsync(int productId);
+
+		Task DeleteAsync(int productId);
 	}
 }

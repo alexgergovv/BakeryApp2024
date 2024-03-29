@@ -43,22 +43,19 @@ namespace BakeryApp2024.Controllers
 		{
 			if (await productService.ExistsAsync(id) == false)
 			{
-				return BadRequest();
-			}
+                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+            }
 
 			var model = await productService.ProductDetailsByIdAsync(id);
 
 			return View(model);
 		}
 
-
-
-		//[HttpPost]
-		//public async Task<IActionResult> Buy(int Id)
-		//{
-		//	return RedirectToAction(nameof(OrderController.Mine), "Order");
-		//}
-
+		[HttpPost]
+		public async Task<IActionResult> Buy(int Id)
+		{
+			return RedirectToAction(nameof(OrderController.Mine), "Order");
+		}
 
 		[HttpGet]
 		[MustBeBaker]
@@ -99,13 +96,13 @@ namespace BakeryApp2024.Controllers
 		{
 			if (await productService.ExistsAsync(id) == false)
 			{
-				return BadRequest();
-			}
+                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+            }
 
 			if (await productService.HasBakerWithIdAsync(id, User.Id()) == false)
 			{
-				return Unauthorized();
-			}
+                return RedirectToAction("Error", "Home", new { statusCode = 401 });
+            }
 
 			var model = await productService.GetProductFormModelByIdAsync(id);
 
@@ -117,13 +114,13 @@ namespace BakeryApp2024.Controllers
 		{
 			if (await productService.ExistsAsync(id) == false)
 			{
-				return BadRequest();
-			}
+                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+            }
 
 			if (await productService.HasBakerWithIdAsync(id, User.Id()) == false)
 			{
-				return Unauthorized();
-			}
+                return RedirectToAction("Error", "Home", new { statusCode = 401 });
+            }
 
 			if (await productService.CategoryExistsAsync(model.CategoryId) == false)
 			{
@@ -146,15 +143,45 @@ namespace BakeryApp2024.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Delete(int id)
 		{
-			var model = new ProductDetailsServiceModel();
+            if (await productService.ExistsAsync(id) == false)
+            {
+                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+            }
 
-			return View(model);
+            if (await productService.HasBakerWithIdAsync(id, User.Id()) == false)
+            {
+				return RedirectToAction("Error", "Home", new { statusCode = 401 });
+            }
+
+			var product = await productService.ProductDetailsByIdAsync(id);
+
+			var model = new ProductDetailsViewModel()
+			{
+				Id = id,
+				Name = product.Name,
+				Description = product.Description,
+				ImageUrl = product.ImageUrl
+			};
+
+            return View(model);
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> Delete(ProductDetailsServiceModel model)
 		{
-			return RedirectToAction(nameof(Details), new { id = "1" });
+            if (await productService.ExistsAsync(model.Id) == false)
+            {
+                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+            }
+
+            if (await productService.HasBakerWithIdAsync(model.Id, User.Id()) == false)
+            {
+                return RedirectToAction("Error", "Home", new { statusCode = 401 });
+            }
+
+			await productService.DeleteAsync(model.Id);
+
+            return RedirectToAction(nameof(All));
 		}
 	}
 }
