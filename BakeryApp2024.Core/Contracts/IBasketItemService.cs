@@ -1,5 +1,4 @@
 ﻿using BakeryApp2024.Core.Models.BasketItem;
-using BakeryApp2024.Core.Models.Product;
 using BakeryApp2024.Infrastructure.Data.Models;
 
 namespace BakeryApp2024.Core.Contracts
@@ -23,5 +22,7 @@ namespace BakeryApp2024.Core.Contracts
 		Task<ItemFormModel?> GetItemFormModelByIdAsync(int id);
 
         Task EditAsync(int itemId, ItemFormModel model);
+
+		Task<IEnumerable<ItemCheckoutModel>> ProjectToItemCheckoutModel(IEnumerable<ItemsDetailsViewModel> items);
     }
 }

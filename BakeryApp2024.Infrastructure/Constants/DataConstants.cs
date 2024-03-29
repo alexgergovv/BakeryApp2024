@@ -39,5 +39,12 @@ namespace BakeryApp2024.Infrastructure.Constants
         public const int OrderQuantityMaxValue = 50;
         public const int OrderStatusMinLength = 5;
         public const int OrderStatusMaxLength = 30;
+
+        public const int CityMaxLength = 50;
+        public const int CityMinLength = 3;
+        public const int CountryMaxLength = 50;
+        public const int CountryMinLength = 2;
+        public const int ZipCodeMaxValue = 99950;
+        public const int ZipCodeMinValue = 501;
     }
 }

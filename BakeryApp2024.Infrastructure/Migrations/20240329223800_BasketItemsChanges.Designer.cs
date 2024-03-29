@@ -4,6 +4,7 @@ using BakeryApp2024.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BakeryApp2024.Infrastructure.Migrations
 {
     [DbContext(typeof(BakeryAppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240329223800_BasketItemsChanges")]
+    partial class BasketItemsChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,6 +85,9 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Product image url");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)")
                         .HasComment("Product price");
@@ -107,6 +112,8 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         .HasComment("User identifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
@@ -177,10 +184,6 @@ namespace BakeryApp2024.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("BasketItemIds")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -248,13 +251,12 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            BasketItemIds = "",
                             City = "Pleven",
                             Country = "Bulgaria",
                             CustomerAddress = "Tsar Simeon 123",
                             CustomerEmail = "gabrielmar284@mail.com",
                             CustomerName = "Gabriel Marinov",
-                            Date = new DateTime(2024, 3, 30, 0, 57, 26, 4, DateTimeKind.Local).AddTicks(9921),
+                            Date = new DateTime(2024, 3, 30, 0, 38, 0, 241, DateTimeKind.Local).AddTicks(5706),
                             Number = 123456789,
                             Status = "Pending",
                             TotalPrice = 0.00m,
@@ -465,15 +467,15 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "460699ef-e08e-4889-81aa-6b4a9cab615c",
+                            ConcurrencyStamp = "360ce63f-7401-4f81-a444-3c97a5fd1ace",
                             Email = "baker@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "baker@mail.com",
                             NormalizedUserName = "baker@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBOwiEzU4Ls8hDPehhsjJL0/qtAobs4HsuyAq+fDsjFcOgB2ut2tL/6VRUcciiQPwQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEObWOw74cv726oULVXCKa3ThomLbRGBrSf4gEwvYVENO9d/pe1vrxf7/8cdEJNb4ow==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bfc62d64-6ed6-4218-a341-e7aa3eeb182e",
+                            SecurityStamp = "852df1ee-4161-4832-ae6a-8250a3e7d23f",
                             TwoFactorEnabled = false,
                             UserName = "baker@mail.com"
                         },
@@ -481,15 +483,15 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "14e31d44-b84b-4b29-ba66-a70a8a9a68db",
+                            ConcurrencyStamp = "5674402c-8f58-4145-899e-ce754bee716e",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKS/sENVuY95UWIXsGyAm/ZYs02tfEObX+q/UAap9eSo47j9fgktelEFFNxd8vRtIQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKLO+Cnc/jCwlCvQrtykEH70xz9DBpaWP4M6nsIMJRQugiDyTdlF5RjRDV6BPwYD2g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1a53b942-e66c-4df9-89d7-8c8bb9eff1c0",
+                            SecurityStamp = "f6518b9c-d68a-4d32-9464-cf0f2dc67fe2",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -593,6 +595,10 @@ namespace BakeryApp2024.Infrastructure.Migrations
 
             modelBuilder.Entity("BakeryApp2024.Infrastructure.Data.Models.BasketItem", b =>
                 {
+                    b.HasOne("BakeryApp2024.Infrastructure.Data.Models.Order", null)
+                        .WithMany("BasketItems")
+                        .HasForeignKey("OrderId");
+
                     b.HasOne("BakeryApp2024.Infrastructure.Data.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -699,6 +705,11 @@ namespace BakeryApp2024.Infrastructure.Migrations
             modelBuilder.Entity("BakeryApp2024.Infrastructure.Data.Models.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BakeryApp2024.Infrastructure.Data.Models.Order", b =>
+                {
+                    b.Navigation("BasketItems");
                 });
 #pragma warning restore 612, 618
         }

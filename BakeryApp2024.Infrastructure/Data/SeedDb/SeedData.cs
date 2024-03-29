@@ -16,6 +16,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
         public Product MascarponePastry { get; set; }
 
         public Order GuestUserOrder { get; set; }
+        public BasketItem BasketItem { get; set; }
 
         public SeedData()
         {
@@ -23,7 +24,8 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
             SeedBaker();
             SeedCategories();
             SeedProducts();
-            //SeedOrder();
+            SeedBasketItem();
+            SeedOrder();
         }
 
         private void SeedUsers()
@@ -123,20 +125,36 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
             };
         }
 
-        //private void SeedOrder()
-        //{
-        //    GuestUserOrder = new Order()
-        //    {
-        //        Id = 1,
-        //        Number = 123456789,
-        //        TotalPrice = 60.00M,
-        //        CustomerName = "Gabriel Marinov",
-        //        CustomerAddress = "Tsar Simeon 123\nSofia, Bulgaria\n1000",
-        //        CustomerEmail = "gabrielmar284@mail.com",
-        //        Date = DateTime.Now,
-        //        Status = "Pending",
-        //        UserId = GuestUser.Id
-        //    };
-        //}
+        public void SeedBasketItem()
+        {
+            BasketItem = new BasketItem()
+            {
+                Id = 14,
+                ProductName = MascarponePastry.Name,
+                Price = MascarponePastry.Price,
+                ImageUrl = MascarponePastry.ImageUrl,
+                ProductId = 3,
+                Quantity = 1,
+                UserId = GuestUser.Id
+            };
+        }
+        private void SeedOrder()
+        {
+            GuestUserOrder = new Order()
+            {
+                Id = 1,
+                Number = 123456789,
+                TotalPrice = 0.00M,
+                CustomerName = "Gabriel Marinov",
+                CustomerAddress = "Tsar Simeon 123",
+                ZipCode = 1000,
+                Country = "Bulgaria",
+                City = "Pleven",
+                CustomerEmail = "gabrielmar284@mail.com",
+                Date = DateTime.Now,
+                Status = "Pending",
+                UserId = GuestUser.Id
+            };
+        }
     }
 }

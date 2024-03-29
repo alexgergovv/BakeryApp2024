@@ -1,0 +1,106 @@
+﻿@model OrderFormModel
+
+<form method="post" asp-action="Checkout" asp-controller="BasketItem">
+	<link rel="stylesheet" type="text/css" href="~/css/Checkout.css" />
+	<div class="row">
+		<div class="col-50">
+			<h3>Billing Address</h3>
+			
+			<label asp-for="CustomerName"><i class="fa fa-user"></i> Full Name</label>
+			<input asp-for="CustomerName" class="form-control" type="text" placeholder="Victor Petrov">
+			<span asp-validation-for="CustomerName" class="small text-danger"></span>
+
+			<label asp-for="CustomerEmail"><i class="fa fa-envelope"></i> Email</label>
+			<input asp-for="CustomerEmail" class="form-control" type="email" placeholder="victor@example.com">
+			<span asp-validation-for="CustomerEmail" class="small text-danger"></span>
+
+			<label asp-for="CustomerAddress"><i class="fa fa-address-card-o"></i> Address</label>
+			<input asp-for="CustomerAddress" class="form-control" type="text" placeholder="Tsar Kaloyan 12">
+			<span asp-validation-for="CustomerAddress" class="small text-danger"></span>
+
+			<label asp-for="City"><i class="fa fa-institution"></i> City</label>
+			<input asp-for="City" class="form-control" type="text" placeholder="Sofia">
+			<span asp-validation-for="City" class="small text-danger"></span>
+
+			<div class="row">
+				<div class="col-50">
+					<label asp-for="Country">Country</label>
+					<input asp-for="Country" class="form-control" type="text" placeholder="NY">
+					<span asp-validation-for="Country" class="small text-danger"></span>
+				</div>
+				<div class="col-50">
+					<label asp-for="ZipCode">Zip</label>
+					<input asp-for="ZipCode" class="form-control" type="text" placeholder="1000">
+					<span asp-validation-for="ZipCode" class="small text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-50">
+			<h3>Payment</h3>
+			<label for="fname">Accepted Cards</label>
+			<div class="icon-container">
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+				<i class="fa fa-cc-visa" style="color:navy;"></i>
+				<i class="fa fa-cc-amex" style="color:blue;"></i>
+				<i class="fa fa-cc-mastercard" style="color:red;"></i>
+				<i class="fa fa-cc-discover" style="color:orange;"></i>
+			</div>
+			<label for="cname">Name on Card</label>
+			<input type="text" id="cname" name="cardname" placeholder="John More Doe">
+			<label for="ccnum">
+				<i class="bi bi-credit-card-2-back">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
+						<path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5z" />
+						<path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm13 2v5H1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1m-1 9H2a1 1 0 0 1-1-1v-1h14v1a1 1 0 0 1-1 1" />
+					</svg>
+				</i>Credit card number
+			</label>
+			<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+			<label for="expmonth">Exp Month</label>
+			<input type="text" id="expmonth" name="expmonth" placeholder="September">
+
+			<div class="row">
+				<div class="col-50">
+					<label for="expyear">Exp Year</label>
+					<input type="text" id="expyear" name="expyear" placeholder="2018">
+				</div>
+				<div class="col-50">
+					<label for="cvv">CVV</label>
+					<input type="text" id="cvv" name="cvv" placeholder="352">
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<label>
+		<input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+	</label>
+	<div class="col-25">
+		<div class="container">
+			<h4>
+				Cart
+				<span class="price" style="color:black">
+					<i class="fa fa-shopping-cart"></i>
+					<b>Items: @Model.BasketItems.Sum(i => i.Quantity)</b>
+				</span>
+			</h4>
+			@{
+				decimal totalPrice = 0;
+			}
+			@foreach (var item in @Model.BasketItems)
+			{
+				decimal currentPrice = item.Price * item.Quantity;
+				totalPrice += currentPrice;
+				<p><a>@item.ProductName</a> <a> x @item.Quantity</a> <span class="price">@currentPrice BGN</span></p>
+			}
+			<hr>
+			<p>Total <span class="price" style="color:black"><b>@totalPrice BGN</b></span></p>
+		</div>
+	</div>
+	<input type="submit" value="Continue to checkout" class="btn">
+</form>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

@@ -1,9 +1,11 @@
 ﻿using BakeryApp2024.Core.Contracts;
 using BakeryApp2024.Core.Models.BasketItem;
+using BakeryApp2024.Core.Models.Order;
 using BakeryApp2024.Core.Services;
 using BakeryApp2024.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace BakeryApp2024.Controllers
 {
@@ -11,9 +13,12 @@ namespace BakeryApp2024.Controllers
 	public class BasketItemController : Controller
 	{
 		private readonly IBasketItemService basketItemService;
-        public BasketItemController(IBasketItemService _basketItemService)
+		private readonly IOrderService orderService;
+        public BasketItemController(IBasketItemService _basketItemService,
+			IOrderService _orderService)
         {
             basketItemService = _basketItemService;
+			orderService = _orderService;
         }
 
         public async Task<IActionResult> Mine()
@@ -56,5 +61,32 @@ namespace BakeryApp2024.Controllers
 
             return RedirectToAction(nameof(Mine));
         }
+
+		[HttpGet]
+		public async Task<IActionResult> Checkout()
+		{
+			var models = await basketItemService.MineByUserIdAsync(User.Id());
+			var items = await basketItemService.ProjectToItemCheckoutModel(models);
+
+			var order = new OrderFormModel()
+			{
+				BasketItems = items
+			};
+
+			return View(order);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Checkout(OrderFormModel order)
+		{
+			var models = await basketItemService.MineByUserIdAsync(User.Id());
+			var items = await basketItemService.ProjectToItemCheckoutModel(models);
+
+			order.BasketItems = items;
+
+			await orderService.CreateAsync(order, User.Id());
+
+			return RedirectToAction(nameof(Mine));
+		}
 	}
 }

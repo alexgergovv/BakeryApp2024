@@ -6,7 +6,7 @@ using static BakeryApp2024.Infrastructure.Constants.DataConstants;
 
 namespace BakeryApp2024.Infrastructure.Data.Models
 {
-    [Comment("Products orders")]
+	[Comment("Products orders")]
     public class Order
     {
         [Key]
@@ -28,6 +28,18 @@ namespace BakeryApp2024.Infrastructure.Data.Models
         public string CustomerAddress { get; set; } = string.Empty;
 
         [Required]
+        [MaxLength(CityMaxLength)]
+        public string City { get; set; } = string.Empty;
+
+		[Required]
+		[MaxLength(CountryMaxLength)]
+		public string Country { get; set; } = string.Empty;
+
+		[Required]
+        [Comment("Zip code")]
+		public int ZipCode { get; set; } 
+
+		[Required]
         [MaxLength(OrderCustomerEmailMaxLength)]
         [Comment("Customer email")]
         public string CustomerEmail { get; set; } = string.Empty;
@@ -53,6 +65,6 @@ namespace BakeryApp2024.Infrastructure.Data.Models
 
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; } = null!;
-        public IEnumerable<BasketItem> BasketItems { get; set; } = new List<BasketItem>();
+        public string BasketItemIds { get; set; } = string.Empty;
     }
 }
