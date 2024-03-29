@@ -1,0 +1,24 @@
+﻿@model ItemFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <div class="card mb-3">
+                    <img class="card-img-top" style="height: 20rem; width:38rem; padding-left: 2rem; padding-top: 2rem;" src="@Model.ImageUrl" alt="Product Image">
+                    <div class="card-body text-center">
+                        <h4>@Model.ProductName</h4>
+                        <h6>
+                            Price:
+                            <b>@String.Format("{0:f2}", Model.Price) BGN</b>
+                        </h6>
+                        <br />
+                <label asp-for="Quantity"></label>
+                <input asp-for="Quantity" class="form-control" min="1" max="50" placeholder="@Model.Quantity">
+                <span asp-validation-for="Quantity" class="small text-danger"></span>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

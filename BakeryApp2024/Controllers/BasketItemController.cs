@@ -1,5 +1,6 @@
 ﻿using BakeryApp2024.Core.Contracts;
 using BakeryApp2024.Core.Models.BasketItem;
+using BakeryApp2024.Core.Services;
 using BakeryApp2024.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace BakeryApp2024.Controllers
 
         public async Task<IActionResult> Mine()
 		{
-			var items = await basketItemService.MineByIdAsync(User.Id());
+			var items = await basketItemService.MineByUserIdAsync(User.Id());
 
 			return View(items);
 		}
@@ -25,15 +26,35 @@ namespace BakeryApp2024.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Remove(int id)
 		{
-			var model = new ItemsDetailsViewModel();
+			await basketItemService.DeleteAsync(id);
 
-			return View(model);
+			return RedirectToAction("Mine");
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+            if (await basketItemService.ExistsAsync(id) == false)
+            {
+                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+            }
+
+			var model = await basketItemService.GetItemFormModelByIdAsync(id);
+
+            return View(model);
+        }
 
 		[HttpPost]
-		public async Task<IActionResult> Remove(ItemsDetailsViewModel model)
+		public async Task<IActionResult> Edit(int id, ItemFormModel model)
 		{
-			return RedirectToAction(nameof(Mine));
-		}
+			if (await basketItemService.ExistsAsync(id) == false)
+			{
+				return RedirectToAction("Error", "Home", new { statusCode = 400 });
+			}
+
+            await basketItemService.EditAsync(id, model);
+
+            return RedirectToAction(nameof(Mine));
+        }
 	}
 }

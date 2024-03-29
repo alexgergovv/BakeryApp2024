@@ -32,11 +32,11 @@
         {
             var product = products[i];
             <div align="center" class="carousel-item @(i == 0 ? "active" : string.Empty)">
-                <img class="d-block w-100" style="height:750px"
+                <img class="d-block w-100" style="height:650px"
                      src="@product.ImageUrl" alt="@product.Name">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>
-                        <a class="btn btn-lg btn btn btn-outline-warning" asp-controller="Product" asp-action="Details"
+                        <a class="btn btn-lg btn btn btn-warning" asp-controller="Product" asp-action="Details"
                            asp-route-id="@product.Id"> @product.Name</a>
                     </h5>
                 </div>

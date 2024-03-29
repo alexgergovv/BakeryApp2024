@@ -16,7 +16,6 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
         public Product MascarponePastry { get; set; }
 
         public Order GuestUserOrder { get; set; }
-        public Blog FirstBlog { get; set; }
 
         public SeedData()
         {
@@ -25,7 +24,6 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
             SeedCategories();
             SeedProducts();
             //SeedOrder();
-            SeedBlog();
         }
 
         private void SeedUsers()
@@ -124,6 +122,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
                 BakerId = Baker.Id
             };
         }
+
         //private void SeedOrder()
         //{
         //    GuestUserOrder = new Order()
@@ -139,19 +138,5 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
         //        UserId = GuestUser.Id
         //    };
         //}
-
-        private void SeedBlog()
-        {
-            FirstBlog = new Blog()
-            {
-                Id = 1,
-                Title = "Baking Bliss: A Guide to Creating Delicious Treats in Your Own Kitchen",
-                Content = "Welcome to our bakery blog! Whether you're a seasoned baker or new to the kitchen, we've got tips, tricks, and recipes for you. From cookies to cakes, we'll guide you through baking with detailed instructions and helpful hints. Stay tuned for weekly updates, challenges, and behind-the-scenes peeks. Let's bake together and create mouthwatering desserts!",
-                Author = Baker.Name,
-                ImageUrl = "https://www.posist.com/restaurant-times/wp-content/uploads/2016/10/A-Detailed-Guide-On-Starting-A-Bakery-Business-In-India-In-2023.jpg",
-				DatePublished = DateTime.Now,
-                UserId = GuestUser.Id
-            };
-        }
     }
 }
