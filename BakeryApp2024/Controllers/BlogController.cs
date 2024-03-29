@@ -1,6 +1,4 @@
 ﻿using BakeryApp2024.Core.Models.Blog;
-using BakeryApp2024.Core.Models.Order;
-using BakeryApp2024.Core.Models.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

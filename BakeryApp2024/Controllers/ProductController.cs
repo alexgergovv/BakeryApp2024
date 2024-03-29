@@ -1,9 +1,12 @@
 ﻿using BakeryApp2024.Attributes;
 using BakeryApp2024.Core.Contracts;
+using BakeryApp2024.Core.Models.BasketItem;
 using BakeryApp2024.Core.Models.Product;
 using BakeryApp2024.Extensions;
+using BakeryApp2024.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Versioning;
 
 namespace BakeryApp2024.Controllers
 {
@@ -13,10 +16,15 @@ namespace BakeryApp2024.Controllers
 
 		private readonly IBakerService bakerService;
 
-		public ProductController(IProductService _productService, IBakerService _bakerService)
+		private readonly IBasketItemService basketItemService;
+
+		public ProductController(IProductService _productService,
+			IBakerService _bakerService,
+			IBasketItemService _basketItemService)
 		{
 			productService = _productService;
 			bakerService = _bakerService;
+			basketItemService = _basketItemService;
 		}
 
 		[AllowAnonymous]
@@ -52,9 +60,37 @@ namespace BakeryApp2024.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Buy(int Id)
+		public async Task<IActionResult> Buy(int id)
 		{
-			return RedirectToAction(nameof(OrderController.Mine), "Order");
+			if (await productService.ExistsAsync(id) == false)
+			{
+				return RedirectToAction("Error", "Home", new { statusCode = 400 });
+			}
+
+			var product = await productService.GetByIdAsync(id);
+
+			if (await basketItemService.ProductItemExistsByIdAsync(product.Id) == false)
+			{
+				var item = new BasketItem()
+				{
+					ImageUrl = product.ImageUrl,
+					Price = product.Price,
+					ProductName = product.Name,
+					ProductId = product.Id,
+					UserId = User.Id(),
+					Quantity = 1
+				};
+
+				await basketItemService.AddItemAsync(item);
+			}
+			else
+			{
+				var item = await basketItemService.GetByProductIdAsync(product.Id);
+
+				await basketItemService.IncreaseQuantity(item.Id);
+			}
+
+			return RedirectToAction(nameof(BasketItemController.Mine), "BasketItem");
 		}
 
 		[HttpGet]

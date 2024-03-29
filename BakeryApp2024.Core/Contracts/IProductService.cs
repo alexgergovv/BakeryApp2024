@@ -1,6 +1,7 @@
 ﻿using BakeryApp2024.Core.Enumerations;
 using BakeryApp2024.Core.Models.Home;
 using BakeryApp2024.Core.Models.Product;
+using BakeryApp2024.Infrastructure.Data.Models;
 
 namespace BakeryApp2024.Core.Contracts
 {
@@ -34,5 +35,7 @@ namespace BakeryApp2024.Core.Contracts
 		Task<ProductFormModel?> GetProductFormModelByIdAsync(int productId);
 
 		Task DeleteAsync(int productId);
+
+		Task<Product> GetByIdAsync(int id);
 	}
 }

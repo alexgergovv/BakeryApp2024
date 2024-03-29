@@ -20,12 +20,13 @@
 			</p>
 			<p>@Model.Description</p>
 			<p>Category: <b>@Model.Category</b></p>
+			<br />
 			<div class="form-inline">
 				@if (this.User.Identity.IsAuthenticated)
 				{
-					<a class="btn btn-warning" asp-controller="Product" asp-action="Edit"
+					<a class="btn btn-warning" style="margin-bottom:10px" asp-controller="Product" asp-action="Edit"
 					   asp-route-id="@Model.Id">Edit</a>
-					<a class="ml-2 btn btn-danger" asp-controller="Product" asp-action="Delete"
+					<a class="ml-2 btn btn-danger" style="margin-bottom:10px" asp-controller="Product" asp-action="Delete"
 					   asp-route-id="@Model.Id">Delete</a>
 					<form class="ml-2" asp-controller="Product"
 						  asp-action="Buy" asp-route-id="@Model.Id" method="post">

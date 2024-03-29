@@ -132,6 +132,11 @@ namespace BakeryApp2024.Core.Services
 				.AnyAsync(p => p.Id == id);
         }
 
+		public async Task<Product> GetByIdAsync(int id)
+		{
+			 return await repository.GetByIdAsync<Product>(id);
+		}
+
 		public async Task<ProductFormModel?> GetProductFormModelByIdAsync(int id)
 		{
 			var product = await repository.AllReadOnly<Product>()
@@ -170,7 +175,8 @@ namespace BakeryApp2024.Core.Services
 
 		public async Task<bool> HasBakerWithIdAsync(int productId, string userId)
 		{
-			return await repository.AllReadOnly<Product>()
+			return await repository
+				.AllReadOnly<Product>()
 				.AnyAsync(p => p.Id == productId && p.Baker.UserId == userId);
 		}
 
@@ -194,5 +200,7 @@ namespace BakeryApp2024.Core.Services
 				 })
 				 .FirstAsync();
         }
+
+
     }
 }

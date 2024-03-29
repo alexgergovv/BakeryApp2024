@@ -4,6 +4,7 @@ using BakeryApp2024.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BakeryApp2024.Infrastructure.Migrations
 {
     [DbContext(typeof(BakeryAppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240329114106_databaseModelsChanged")]
+    partial class databaseModelsChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,21 +80,12 @@ namespace BakeryApp2024.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("Product image url");
-
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)")
                         .HasComment("Product price");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int")
-                        .HasComment("Product identifier");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -113,11 +106,9 @@ namespace BakeryApp2024.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId");
-
                     b.HasIndex("UserId");
 
-                    b.ToTable("BasketItems");
+                    b.ToTable("BasketItem");
 
                     b.HasComment("Basket items");
                 });
@@ -176,7 +167,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                             Id = 1,
                             Author = "Buddy Valastro",
                             Content = "Welcome to our bakery blog! Whether you're a seasoned baker or new to the kitchen, we've got tips, tricks, and recipes for you. From cookies to cakes, we'll guide you through baking with detailed instructions and helpful hints. Stay tuned for weekly updates, challenges, and behind-the-scenes peeks. Let's bake together and create mouthwatering desserts!",
-                            DatePublished = new DateTime(2024, 3, 29, 16, 9, 4, 734, DateTimeKind.Local).AddTicks(3522),
+                            DatePublished = new DateTime(2024, 3, 29, 13, 41, 6, 379, DateTimeKind.Local).AddTicks(5469),
                             ImageUrl = "https://www.posist.com/restaurant-times/wp-content/uploads/2016/10/A-Detailed-Guide-On-Starting-A-Bakery-Business-In-India-In-2023.jpg",
                             Title = "Baking Bliss: A Guide to Creating Delicious Treats in Your Own Kitchen",
                             UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
@@ -483,15 +474,15 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0b4c36d6-727b-4229-95b8-a09a1db3dc80",
+                            ConcurrencyStamp = "7190a7fb-27ab-4911-b695-bb3b356af0e4",
                             Email = "baker@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "baker@mail.com",
                             NormalizedUserName = "baker@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGxkdaW7OzR6zX4EzNPwXdi92hd0TdJBuZ062xzikhp35iUF48nlZV8AcyFP8yZ7jw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB7xFE30/q7vhCx09NKvyzp+BWN64Y23hgTnbdn5SJ17q37n7ivoPDbKpN5+kxS60A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "781412ab-f05a-4811-846a-c224c451d659",
+                            SecurityStamp = "9ed141c8-de9a-44df-a89c-ffb8acdc6b58",
                             TwoFactorEnabled = false,
                             UserName = "baker@mail.com"
                         },
@@ -499,15 +490,15 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6687a5c4-b508-404a-b03f-84bf07b4a246",
+                            ConcurrencyStamp = "dc15113a-cdef-4475-a0a5-daa37bf3b867",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAENDUTvUaECkcmuuswz4v3lRzZMAwX1EPgKDvmC10ypeyoLHtrphwr00Ys+WChuG91w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENpUCWGtbog4U4TZJRHsmqwFVuRBGBiORK/VYmhOWKzSzX2m+f9jMCb/sup+Uj85yg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d74ca399-3b2a-4e29-9484-fce551e2f651",
+                            SecurityStamp = "0f4e0e0b-0f92-4f58-be8b-0037c25da1e3",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -615,19 +606,11 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         .WithMany("BasketItems")
                         .HasForeignKey("OrderId");
 
-                    b.HasOne("BakeryApp2024.Infrastructure.Data.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
 
                     b.Navigation("User");
                 });

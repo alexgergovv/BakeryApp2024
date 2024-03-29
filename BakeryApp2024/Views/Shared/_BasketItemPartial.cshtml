@@ -1,0 +1,22 @@
+﻿@model ItemsDetailsViewModel
+
+<div class=".container-md" style="width:25rem">
+    <div class="card mb-3">
+        <img class="card-img-top" style="height: 16rem; width: 21rem; padding-left: 2rem; padding-top: 2rem;" src="@Model.ImageUrl" alt="Product Image">
+        <div class="card-body align-text-top">
+            <h3>@Model.ProductName</h3>
+            <h4 style="height:2rem">Quantity: @Model.Quantity</h4>
+            <h6 style ="height:2rem">
+                Price:
+                <b>@String.Format("{0:f2}", Model.Price) BGN</b>
+            </h6>
+            <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id"
+               class="btn btn-info">Details</a>
+                <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
+                   class="btn btn-warning">Edit Quantity</a>
+                <a asp-controller="BasketItem" asp-action="Remove" asp-route-id="@Model.Id"
+               class="btn btn-danger" >Remove</a>
+                <p></p>
+        </div>
+    </div>
+</div>
