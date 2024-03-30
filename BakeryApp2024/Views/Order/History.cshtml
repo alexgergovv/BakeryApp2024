@@ -1,0 +1,13 @@
+﻿@model IEnumerable<OrderViewModel>
+@{
+    ViewBag.Title = "Order History";
+}
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    @foreach (var order in Model)
+    {
+        <partial name="_OrderPartial" model="@order" />
+    }
+</div>

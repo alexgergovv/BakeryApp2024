@@ -45,6 +45,6 @@ namespace BakeryApp2024.Core.Models.Order
 		[Display(Name = "Email")]
 		public string CustomerEmail { get; set; } = string.Empty;
 
-		public IEnumerable<ItemCheckoutModel> BasketItems { get; set; } = new List<ItemCheckoutModel>();
+		public IEnumerable<ItemFormModel> BasketItems { get; set; } = new List<ItemFormModel>();
 	}
 }

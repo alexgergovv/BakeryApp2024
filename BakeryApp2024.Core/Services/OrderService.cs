@@ -1,4 +1,5 @@
 ﻿using BakeryApp2024.Core.Contracts;
+using BakeryApp2024.Core.Models.BasketItem;
 using BakeryApp2024.Core.Models.Order;
 using BakeryApp2024.Infrastructure.Data.Common;
 using BakeryApp2024.Infrastructure.Data.Models;
@@ -20,38 +21,68 @@ namespace BakeryApp2024.Core.Services
             repository = _repository;
         }
 
-		public async Task CreateAsync(OrderFormModel model, string userId)
+        public async Task<IEnumerable<OrderViewModel>> GetOrdersByUserIdAsync(string userId)
+        {
+            var orders = await repository.AllReadOnly<Order>()
+                .Where(o => o.UserId == userId)
+                .OrderByDescending(o => o.Date)
+                .Select(o => new OrderViewModel()
+                {
+                    CustomerName = o.CustomerName,
+                    Number = o.Number,
+                    Date = o.Date.ToShortDateString(),
+                    TotalPrice = o.TotalPrice,
+					OrderStatus = o.Status
+                })
+                .ToListAsync();
+
+            await SeedBasketItems(orders);
+
+			return orders;
+        }
+
+        private async Task SeedBasketItems(List<OrderViewModel> orders)
+        {
+            foreach (var order in orders)
+            {
+                var current = await repository.AllReadOnly<Order>()
+                    .Where(o => o.Number == order.Number)
+                    .FirstOrDefaultAsync();
+
+                if (current != null)
+                {
+                    List<int> ids = current.BasketItemIds
+                        .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                        .Select(int.Parse)
+                        .ToList();
+
+                    foreach (int id in ids)
+                    {
+                        var basketItem = await repository.AllReadOnly<BasketItem>()
+                            .Where(i => i.Id == id)
+                            .Select(i => new ItemFormModel()
+                            {
+                                ProductName = i.ProductName,
+                                Quantity = i.Quantity,
+                                Price = i.Price,
+								ImageUrl = i.ImageUrl
+                            })
+                            .FirstOrDefaultAsync();
+
+                        if (basketItem != null)
+                        {
+                            order.BasketItems.Add(basketItem);
+                        }
+                    }
+                }
+            }
+        }
+
+        public async Task CreateAsync(OrderFormModel model, string userId)
 		{
-			Random r = new Random();
-			string randomStringNumber = string.Empty;
-
-			for (int i = 0; i < 9; i++)
-			{
-				randomStringNumber += r.Next(0, 9).ToString();
-			}
-
-			int number = int.Parse(randomStringNumber);
-
-			decimal totalPrice = 0;
-
-			foreach (var item in model.BasketItems)
-			{
-				totalPrice += item.Price * item.Quantity;
-			}
-
-			List<int> ids = new List<int>();
-
-			foreach (var item in model.BasketItems)
-			{
-				var current = await repository.AllReadOnly<BasketItem>()
-					.Where(i => i.ProductName == item.ProductName)
-					.FirstOrDefaultAsync();
-
-				if (current != null)
-				{
-					ids.Add(current.Id);
-				}
-			}
+			int number = GetRandomNumber();
+			decimal totalPrice = GetTotalPrice(model.BasketItems);
+			List<int> ids = await GetIds(model.BasketItems);
 
 			Order order = new Order()
 			{
@@ -72,5 +103,50 @@ namespace BakeryApp2024.Core.Services
 			await repository.AddAsync(order);
 			await repository.SaveChangesAsync();
 		}
-	}
+
+		private async Task<List<int>> GetIds(IEnumerable<ItemFormModel> items)
+		{
+			List<int> ids = new List<int>();
+
+			foreach (var item in items)
+			{
+				var current = await repository.AllReadOnly<BasketItem>()
+					.Where(i => i.ProductName == item.ProductName)
+					.FirstOrDefaultAsync();
+
+				if (current != null)
+				{
+					ids.Add(current.Id);
+				}
+			}
+
+			return ids;
+		}
+
+		private static decimal GetTotalPrice(IEnumerable<ItemFormModel> items)
+		{
+			decimal totalPrice = 0;
+
+			foreach (var item in items)
+			{
+				totalPrice += item.Price * item.Quantity;
+			}
+
+			return totalPrice;
+		}
+
+		private static int GetRandomNumber()
+		{
+			Random r = new Random();
+			string randomStringNumber = string.Empty;
+
+			for (int i = 0; i < 9; i++)
+			{
+				randomStringNumber += r.Next(0, 9).ToString();
+			}
+
+			int number = int.Parse(randomStringNumber);
+			return number;
+		}
+    }
 }

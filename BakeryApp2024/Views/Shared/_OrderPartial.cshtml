@@ -1,0 +1,46 @@
+﻿@model OrderViewModel
+
+<section class="h-100 gradient-custom">
+	<link rel="stylesheet" type="text/css" href="~/css/OrderHistory.css" />
+	<div class="container py-5 h-100">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col-lg-10 col-xl-8">
+				<div class="card" style="border-radius: 10px;">
+					<div class="card-header px-4 py-5">
+						<h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #ffbb3a;">@Model.CustomerName</span>!</h5>
+					</div>
+					<div class="card-body p-4">
+						<div class="d-flex justify-content-between align-items-center mb-4">
+							<p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
+							<p class="small text-muted mb-0">Order No. : @Model.Number</p>
+						</div>
+						@foreach (var item in Model.BasketItems)
+						{
+							<partial name="_ItemsFromOrderPartial" model="@item" />
+						}
+
+						<div class="d-flex justify-content-between pt-2">
+							<p class="fw-bold mb-0">Order Details</p>
+							<p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> @Model.TotalPrice BGN</p>
+						</div>
+
+						<div class="d-flex justify-content-between">
+							<p class="text-muted mb-0">Invoice Date : @Model.Date</p>
+						</div>
+						<div class="d-flex justify-content-between mb-5">
+							<p class="text-muted mb-0">Order Status: @Model.OrderStatus</p>
+							<p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
+						</div>
+					</div>
+					<div class="card-footer border-0 px-4 py-5"
+						 style="background-color: #ff9500; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+						<h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+							Total
+							paid: <span class="h2 mb-0 ms-2">@Model.TotalPrice BGN</span>
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

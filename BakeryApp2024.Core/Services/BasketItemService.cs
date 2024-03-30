@@ -99,14 +99,15 @@ namespace BakeryApp2024.Core.Services
                 .AnyAsync(i => i.ProductId == productId);
         }
 
-        public async Task<IEnumerable<ItemCheckoutModel>> ProjectToItemCheckoutModel(IEnumerable<ItemsDetailsViewModel> items)
+        public async Task<IEnumerable<ItemFormModel>> ProjectToItemFormModel(IEnumerable<ItemsDetailsViewModel> items)
         {
             return items
-                .Select(i => new ItemCheckoutModel()
+                .Select(i => new ItemFormModel()
                 {
                     ProductName = i.ProductName,
                     Price = i.Price,
-                    Quantity = i.Quantity
+                    Quantity = i.Quantity,
+                    ImageUrl = i.ImageUrl
                 })
                 .ToList();
         }

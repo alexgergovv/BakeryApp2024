@@ -23,6 +23,6 @@ namespace BakeryApp2024.Core.Contracts
 
         Task EditAsync(int itemId, ItemFormModel model);
 
-		Task<IEnumerable<ItemCheckoutModel>> ProjectToItemCheckoutModel(IEnumerable<ItemsDetailsViewModel> items);
+		Task<IEnumerable<ItemFormModel>> ProjectToItemFormModel(IEnumerable<ItemsDetailsViewModel> items);
     }
 }

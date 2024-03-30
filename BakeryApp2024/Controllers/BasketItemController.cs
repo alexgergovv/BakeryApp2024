@@ -1,16 +1,14 @@
 ﻿using BakeryApp2024.Core.Contracts;
 using BakeryApp2024.Core.Models.BasketItem;
 using BakeryApp2024.Core.Models.Order;
-using BakeryApp2024.Core.Services;
 using BakeryApp2024.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace BakeryApp2024.Controllers
 {
 	[Authorize]
-	public class BasketItemController : Controller
+	public class BasketItemController : BaseController
 	{
 		private readonly IBasketItemService basketItemService;
 		private readonly IOrderService orderService;
@@ -66,7 +64,7 @@ namespace BakeryApp2024.Controllers
 		public async Task<IActionResult> Checkout()
 		{
 			var models = await basketItemService.MineByUserIdAsync(User.Id());
-			var items = await basketItemService.ProjectToItemCheckoutModel(models);
+			var items = await basketItemService.ProjectToItemFormModel(models);
 
 			var order = new OrderFormModel()
 			{
@@ -80,13 +78,13 @@ namespace BakeryApp2024.Controllers
 		public async Task<IActionResult> Checkout(OrderFormModel order)
 		{
 			var models = await basketItemService.MineByUserIdAsync(User.Id());
-			var items = await basketItemService.ProjectToItemCheckoutModel(models);
+			var items = await basketItemService.ProjectToItemFormModel(models);
 
 			order.BasketItems = items;
 
 			await orderService.CreateAsync(order, User.Id());
 
-			return RedirectToAction(nameof(Mine));
+			return RedirectToAction("History", "Order");
 		}
 	}
 }
