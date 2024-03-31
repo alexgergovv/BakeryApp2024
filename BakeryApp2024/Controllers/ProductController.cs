@@ -85,7 +85,7 @@ namespace BakeryApp2024.Controllers
 			}
 			else
 			{
-				var item = await basketItemService.GetByProductIdAsync(product.Id);
+				var item = await basketItemService.GetByProductIdAsync(product.Id, User.Id());
 
 				await basketItemService.IncreaseQuantity(item.Id);
 			}

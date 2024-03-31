@@ -13,7 +13,7 @@ namespace BakeryApp2024.Core.Contracts
 
 		Task<bool> ProductItemExistsByIdAsync(int productId, string userId); 
 
-		Task<BasketItem> GetByProductIdAsync(int productId);
+		Task<BasketItem> GetByProductIdAsync(int productId, string userId);
 
 		Task IncreaseQuantity(int itemId);
 

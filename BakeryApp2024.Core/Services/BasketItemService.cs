@@ -45,10 +45,10 @@ namespace BakeryApp2024.Core.Services
                .AnyAsync(i => i.Id == id);
         }
 
-        public async Task<BasketItem> GetByProductIdAsync(int productId)
+        public async Task<BasketItem> GetByProductIdAsync(int productId, string userId)
         {
             return await repository.AllReadOnly<BasketItem>()
-                .FirstAsync(i => i.ProductId == productId);
+                .FirstAsync(i => i.ProductId == productId && i.UserId == userId);
         }
 
         public async Task<ItemFormModel?> GetItemFormModelByIdAsync(int id)
