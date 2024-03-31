@@ -17,6 +17,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 
         public Order GuestUserOrder { get; set; }
         public BasketItem BasketItem { get; set; }
+        public Review UserReview { get; set; }
 
         public SeedData()
         {
@@ -26,6 +27,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
             SeedProducts();
             SeedBasketItem();
             SeedOrder();
+            SeedReview();
         }
 
         private void SeedUsers()
@@ -153,6 +155,20 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
                 CustomerEmail = "gabrielmar284@mail.com",
                 Date = DateTime.Now,
                 Status = "Pending",
+                UserId = GuestUser.Id
+            };
+        }
+
+        private void SeedReview()
+        {
+            UserReview = new Review()
+            {
+                Id = 1,
+                UserName = "Gabriel Marinov",
+                Stars = 5,
+                Description = "The best bakery in the city!! Highly recommend!",
+                Date = DateTime.Now,
+                UserImageUrl = "https://i.pinimg.com/736x/37/ca/2f/37ca2f94586b35e3ca05edc7b062a9cd.jpg",
                 UserId = GuestUser.Id
             };
         }

@@ -21,6 +21,7 @@ namespace BakeryApp2024.Infrastructure.Data
 			builder.ApplyConfiguration(new ProductConfiguration());
 			builder.ApplyConfiguration(new OrderConfiguration());
 			builder.ApplyConfiguration(new BasketItemConfiguration());
+			builder.ApplyConfiguration(new ReviewConfiguration());
 
 			base.OnModelCreating(builder);
 		}
@@ -30,5 +31,6 @@ namespace BakeryApp2024.Infrastructure.Data
 		public DbSet<Order> Orders { get; init; } = null!;
 		public DbSet<Product> Products { get; init; } = null!;
 		public DbSet<BasketItem> BasketItems { get; init; } = null!;
+		public DbSet<Review> Reviews { get; init; } = null!;
 	}
 }

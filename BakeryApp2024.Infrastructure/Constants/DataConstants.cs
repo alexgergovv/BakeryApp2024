@@ -46,5 +46,10 @@ namespace BakeryApp2024.Infrastructure.Constants
         public const int CountryMinLength = 2;
         public const int ZipCodeMaxValue = 99950;
         public const int ZipCodeMinValue = 501;
-    }
+
+        public const int UserNameMaxLength = 50;
+        public const int UserNameMinLength = 4;
+        public const int ReviewDescriptionMaxLength = 200;
+		public const int ReviewDescriptionMinLength = 5;
+	}
 }

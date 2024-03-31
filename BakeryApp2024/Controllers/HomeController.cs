@@ -26,6 +26,11 @@ namespace BakeryApp2024.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Contacts()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int statusCode)
