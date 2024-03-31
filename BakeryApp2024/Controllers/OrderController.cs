@@ -4,20 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BakeryApp2024.Controllers
 {
-	public class OrderController: BaseController
+	public class OrderController : BaseController
 	{
-        private readonly IOrderService orderService;
-        public OrderController(IOrderService _orderService)
-        {
-              orderService = _orderService;
-        }
+		private readonly IOrderService orderService;
+		public OrderController(IOrderService _orderService)
+		{
+			orderService = _orderService;
+		}
 
-        [HttpGet]
-        public async Task<IActionResult> History()
-        {
-            var orders = await orderService.GetOrdersByUserIdAsync(User.Id());
+		[HttpGet]
+		public async Task<IActionResult> History()
+		{
+			var orders = await orderService.GetOrdersByUserIdAsync(User.Id());
 
-            return View(orders);
-        }
-    }
+			return View(orders);
+		}
+	}
 }

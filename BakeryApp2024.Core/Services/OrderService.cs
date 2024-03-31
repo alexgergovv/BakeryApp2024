@@ -21,7 +21,34 @@ namespace BakeryApp2024.Core.Services
             repository = _repository;
         }
 
-        public async Task<IEnumerable<OrderViewModel>> GetOrdersByUserIdAsync(string userId)
+		public async Task CreateAsync(OrderFormModel model, string userId)
+		{
+			int number = GetRandomNumber();
+			decimal totalPrice = GetTotalPrice(model.BasketItems);
+			List<int> ids = await GetIds(model.BasketItems, userId);
+
+			Order order = new Order()
+			{
+				Number = number,
+				CustomerName = model.CustomerName,
+				CustomerAddress = model.CustomerAddress,
+				CustomerEmail = model.CustomerEmail,
+				City = model.City,
+				Country = model.Country,
+				ZipCode = model.ZipCode,
+				TotalPrice = totalPrice,
+				Date = DateTime.Now,
+				Status = "Pending",
+				UserId = userId,
+				BasketItemIds = string.Join(",", ids)
+			};
+
+			await repository.AddAsync(order);
+			await repository.SaveChangesAsync();
+		}
+
+
+		public async Task<IEnumerable<OrderViewModel>> GetOrdersByUserIdAsync(string userId)
         {
             var orders = await repository.AllReadOnly<Order>()
                 .Where(o => o.UserId == userId)
@@ -78,40 +105,14 @@ namespace BakeryApp2024.Core.Services
             }
         }
 
-        public async Task CreateAsync(OrderFormModel model, string userId)
-		{
-			int number = GetRandomNumber();
-			decimal totalPrice = GetTotalPrice(model.BasketItems);
-			List<int> ids = await GetIds(model.BasketItems);
-
-			Order order = new Order()
-			{
-				Number = number,
-				CustomerName = model.CustomerName,
-				CustomerAddress = model.CustomerAddress,
-				CustomerEmail = model.CustomerEmail,
-				City = model.City,
-				Country = model.Country,
-				ZipCode = model.ZipCode,
-				TotalPrice = totalPrice,
-				Date = DateTime.Now,
-				Status = "Pending",
-				UserId = userId,
-				BasketItemIds = string.Join(",", ids)
-			};
-
-			await repository.AddAsync(order);
-			await repository.SaveChangesAsync();
-		}
-
-		private async Task<List<int>> GetIds(IEnumerable<ItemFormModel> items)
+		private async Task<List<int>> GetIds(IEnumerable<ItemFormModel> items, string userId)
 		{
 			List<int> ids = new List<int>();
 
 			foreach (var item in items)
 			{
 				var current = await repository.AllReadOnly<BasketItem>()
-					.Where(i => i.ProductName == item.ProductName)
+					.Where(i => i.UserId == userId && i.ProductName == item.ProductName)
 					.FirstOrDefaultAsync();
 
 				if (current != null)

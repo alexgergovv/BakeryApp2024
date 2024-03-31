@@ -69,7 +69,7 @@ namespace BakeryApp2024.Controllers
 
 			var product = await productService.GetByIdAsync(id);
 
-			if (await basketItemService.ProductItemExistsByIdAsync(product.Id) == false)
+			if (await basketItemService.ProductItemExistsByIdAsync(product.Id, User.Id()) == false)
 			{
 				var item = new BasketItem()
 				{

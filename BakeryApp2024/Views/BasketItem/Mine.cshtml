@@ -16,8 +16,12 @@
         <partial name="_BasketItemPartial" model="@item" />
     }
 </div>
-<div class="d-grid gap-2 position-relative" style="padding-top: 20px; padding-bottom: 20px;">
-    <form class="ml-2" method="get" asp-controller="BasketItem" asp-action="Checkout">
-        <input class="btn btn-primary position-absolute top-50 start-50 translate-middle w-50" type="submit" value="CHECKOUT" />
-    </form>
+
+@if (Model.Any())
+{
+    <div class="d-grid gap-2 position-relative" style="padding-top: 20px; padding-bottom: 20px;">
+        <form class="ml-2" method="get" asp-controller="BasketItem" asp-action="Checkout">
+            <input class="btn btn-primary position-absolute top-50 start-50 translate-middle w-50" type="submit" value="CHECKOUT" />
+        </form>
     </div>
+}

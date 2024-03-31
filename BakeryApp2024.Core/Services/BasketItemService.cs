@@ -26,7 +26,7 @@ namespace BakeryApp2024.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task EditAsync(int itemId, ItemFormModel model)
+		public async Task EditAsync(int itemId, ItemFormModel model)
         {
             var item = await repository.GetByIdAsync<BasketItem>(itemId);
 
@@ -92,10 +92,11 @@ namespace BakeryApp2024.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<bool> ProductItemExistsByIdAsync(int productId)
+        public async Task<bool> ProductItemExistsByIdAsync(int productId, string userId)
         {
             return await repository
                 .AllReadOnly<BasketItem>()
+                .Where (i => i.UserId == userId)
                 .AnyAsync(i => i.ProductId == productId);
         }
 

@@ -11,7 +11,7 @@ namespace BakeryApp2024.Core.Contracts
 
 		Task DeleteAsync(int productId);
 
-		Task<bool> ProductItemExistsByIdAsync(int productId); 
+		Task<bool> ProductItemExistsByIdAsync(int productId, string userId); 
 
 		Task<BasketItem> GetByProductIdAsync(int productId);
 
