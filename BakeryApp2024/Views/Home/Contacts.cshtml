@@ -1,11 +1,41 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Display Geolocation</title>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-	<h1>Specific Geolocation</h1>
-	<div id="map" style="width: 400px; height: 300px;"></div>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtOmz5Z-6krGPifwh8jBKs0YUXsmro6LU"></script>
+
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            var coordinates = { lat: 42.689192988795014, lng: 23.318452722169145 };
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: coordinates,
+                zoom: 12 
+            });
+
+            var marker = new google.maps.Marker({
+                position: coordinates,
+                map: map,
+                title: 'Your Location' 
+            });
+        }
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtOmz5Z-6krGPifwh8jBKs0YUXsmro6LU&callback=initMap">
+    </script>
+
 </body>
 </html>
