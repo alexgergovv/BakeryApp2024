@@ -26,6 +26,7 @@ namespace BakeryApp2024.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Contacts()
         {
             return View();

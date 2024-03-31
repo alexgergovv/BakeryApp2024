@@ -77,9 +77,14 @@ h2 {
     position: absolute;
     top: 45px;
     right: 50px;
-    width: 120px;
-    height: 50px;
     border-radius: 10px;
+}
+
+.button-like{
+    background-color: white;
+    color: blue;
+    text-align: center;
+    padding: 10px 20px;
 }
 
 .top1 {

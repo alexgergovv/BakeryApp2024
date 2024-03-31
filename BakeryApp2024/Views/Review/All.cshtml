@@ -20,19 +20,16 @@
 </head>
 
 <body>
-	<!-- Main Container for Clients Review -->
 	<div class="container1">
-		<button type="button" class="top-right-button btn-outline-primary">Add review</button>
+		<a asp-controller="Review" asp-action="Add" type="button" class="btn button-like btn-outline-primary top-right-button">Add review</a>
 		<h2> Our Happy Clients </h2>
 		<p class="description1">
 			Here you can see all of the amazing reviews about our bakery! 
 			If you have ordered from us please leave us a review. It would really help us. Thank you!
 		</p>
 
-		<!-- Clients Review Section -->
 		<div class="reviewSection1">
 
-			<!-- Clients Review-1 Section Starts from Here  -->
 			@foreach (var review in Model)
 			{
 				<partial name="_ReviewPartial" model="@review" />
