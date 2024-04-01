@@ -32,6 +32,8 @@ namespace BakeryApp2024.Infrastructure.Data.Models
 		[Comment("Product image url")]
 		public string ImageUrl { get; set; } = string.Empty;
 
+        [Required]
+        public bool IsDeleted { get; set; }
 
 		[Required]
         [Comment("User identifier")]

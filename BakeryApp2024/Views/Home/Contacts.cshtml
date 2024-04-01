@@ -1,4 +1,8 @@
-﻿
+﻿@{
+    ViewBag.Title = "Contacts";
+}
+<h2 class="text-center" style="padding-top: 20px">@ViewData["Title"]</h2>
+<hr />
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +19,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtOmz5Z-6krGPifwh8jBKs0YUXsmro6LU"></script>
 
     <div id="map"></div>
-
     <script>
         function initMap() {
             var coordinates = { lat: 42.689192988795014, lng: 23.318452722169145 };

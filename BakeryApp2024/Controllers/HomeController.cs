@@ -1,12 +1,10 @@
 ﻿using BakeryApp2024.Core.Contracts;
-using BakeryApp2024.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace BakeryApp2024.Controllers
 {
-    public class HomeController : BaseController
+	public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService productService;

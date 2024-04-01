@@ -1,16 +1,13 @@
 ﻿using BakeryApp2024.Attributes;
 using BakeryApp2024.Core.Contracts;
-using BakeryApp2024.Core.Models.BasketItem;
 using BakeryApp2024.Core.Models.Product;
 using BakeryApp2024.Extensions;
-using BakeryApp2024.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Versioning;
 
 namespace BakeryApp2024.Controllers
 {
-	public class ProductController : BaseController
+    public class ProductController : BaseController
 	{
 		private readonly IProductService productService;
 
@@ -71,17 +68,7 @@ namespace BakeryApp2024.Controllers
 
 			if (await basketItemService.ProductItemExistsByIdAsync(product.Id, User.Id()) == false)
 			{
-				var item = new BasketItem()
-				{
-					ImageUrl = product.ImageUrl,
-					Price = product.Price,
-					ProductName = product.Name,
-					ProductId = product.Id,
-					UserId = User.Id(),
-					Quantity = 1
-				};
-
-				await basketItemService.AddItemAsync(item);
+				await basketItemService.AddItemAsync(product, User.Id());
 			}
 			else
 			{

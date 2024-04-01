@@ -7,7 +7,7 @@ namespace BakeryApp2024.Core.Contracts
 	{
 		Task<IEnumerable<ItemsDetailsViewModel>> MineByUserIdAsync(string userId);
 
-		Task AddItemAsync(BasketItem model);
+		Task AddItemAsync(Product product, string userId);
 
 		Task DeleteAsync(int productId);
 
@@ -24,5 +24,7 @@ namespace BakeryApp2024.Core.Contracts
         Task EditAsync(int itemId, ItemFormModel model);
 
 		Task<IEnumerable<ItemFormModel>> ProjectToItemFormModel(IEnumerable<ItemsDetailsViewModel> items);
+
+		Task DeleteByUserIdAsync(string userId);
     }
 }

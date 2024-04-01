@@ -1,7 +1,5 @@
 ﻿using BakeryApp2024.Core.Contracts;
-using BakeryApp2024.Core.Models.Product;
 using BakeryApp2024.Core.Models.Review;
-using BakeryApp2024.Core.Services;
 using BakeryApp2024.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

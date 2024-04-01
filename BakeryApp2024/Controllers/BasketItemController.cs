@@ -84,6 +84,8 @@ namespace BakeryApp2024.Controllers
 
 			await orderService.CreateAsync(order, User.Id());
 
+			await basketItemService.DeleteByUserIdAsync(User.Id());
+
 			return RedirectToAction("History", "Order");
 		}
 	}

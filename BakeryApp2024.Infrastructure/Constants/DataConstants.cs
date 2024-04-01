@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BakeryApp2024.Infrastructure.Constants
+﻿namespace BakeryApp2024.Infrastructure.Constants
 {
-    public static class DataConstants
+	public static class DataConstants
     {
         public const int CategoryNameMaxLength = 50;
 

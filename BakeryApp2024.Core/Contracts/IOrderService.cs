@@ -1,10 +1,4 @@
 ﻿using BakeryApp2024.Core.Models.Order;
-using BakeryApp2024.Core.Models.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BakeryApp2024.Core.Contracts
 {

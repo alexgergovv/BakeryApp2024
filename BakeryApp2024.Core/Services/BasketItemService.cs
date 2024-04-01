@@ -14,25 +14,51 @@ namespace BakeryApp2024.Core.Services
             repository = _repository;
         }
 
-        public async Task AddItemAsync(BasketItem model)
+        public async Task AddItemAsync(Product product, string userId)
         {
-            await repository.AddAsync(model);
+			var item = new BasketItem()
+			{
+				ImageUrl = product.ImageUrl,
+				Price = product.Price,
+				ProductName = product.Name,
+				ProductId = product.Id,
+				UserId = userId,
+				Quantity = 1,
+                IsDeleted = false
+			};
+
+			await repository.AddAsync(item);
             await repository.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int itemId)
         {
-            await repository.DeleteAsync<BasketItem>(itemId);
+            var item = await repository.GetByIdAsync<BasketItem>(itemId);
+            item.IsDeleted = true;
             await repository.SaveChangesAsync();
         }
 
-		public async Task EditAsync(int itemId, ItemFormModel model)
+        public async Task DeleteByUserIdAsync(string userId)
+        {
+            var items = await repository.AllReadOnly<BasketItem>()
+                .Where(i => i.UserId == userId && i.IsDeleted == false)
+                .ToListAsync();
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                var item = await repository.GetByIdAsync<BasketItem>(items[i].Id);
+                item.IsDeleted = true;
+                await repository.SaveChangesAsync();
+            }
+        }
+
+        public async Task EditAsync(int itemId, ItemFormModel model)
         {
             var item = await repository.GetByIdAsync<BasketItem>(itemId);
 
             if (item != null)
             {
-              item.Quantity = model.Quantity;
+                item.Quantity = model.Quantity;
 
                 await repository.SaveChangesAsync();
             }
@@ -42,19 +68,20 @@ namespace BakeryApp2024.Core.Services
         {
             return await repository
                .AllReadOnly<BasketItem>()
-               .AnyAsync(i => i.Id == id);
+               .AnyAsync(i => i.Id == id && i.IsDeleted == false);
         }
 
         public async Task<BasketItem> GetByProductIdAsync(int productId, string userId)
         {
             return await repository.AllReadOnly<BasketItem>()
-                .FirstAsync(i => i.ProductId == productId && i.UserId == userId);
+                .OrderByDescending(i => i.Id)
+                .FirstAsync(i => i.ProductId == productId && i.UserId == userId && i.IsDeleted == false);
         }
 
         public async Task<ItemFormModel?> GetItemFormModelByIdAsync(int id)
         {
             return await repository.AllReadOnly<BasketItem>()
-                 .Where(i => i.Id == id)
+                 .Where(i => i.Id == id && i.IsDeleted == false)
                  .Select(i => new ItemFormModel()
                  {
                      ProductName = i.ProductName,
@@ -63,8 +90,6 @@ namespace BakeryApp2024.Core.Services
                      Quantity = i.Quantity,
                  })
                  .FirstOrDefaultAsync();
-
-
         }
 
         public async Task IncreaseQuantity(int itemId)
@@ -79,7 +104,7 @@ namespace BakeryApp2024.Core.Services
         {
             return await repository
                 .AllReadOnly<BasketItem>()
-                .Where(i => i.UserId == userId)
+                .Where(i => i.UserId == userId && i.IsDeleted == false)
                 .Select(i => new ItemsDetailsViewModel()
                 {
                     Id = i.Id,
@@ -96,7 +121,7 @@ namespace BakeryApp2024.Core.Services
         {
             return await repository
                 .AllReadOnly<BasketItem>()
-                .Where (i => i.UserId == userId)
+                .Where (i => i.UserId == userId && i.IsDeleted == false)
                 .AnyAsync(i => i.ProductId == productId);
         }
 

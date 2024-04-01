@@ -1,4 +1,39 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ReviewFormModel
+
+<div class="container">
+	<script src="~/js/Stars.js" defer></script>
+	<link rel="stylesheet" href="~/css/ReviewForm.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+	<form method="post">
+		<div class="form-group">
+			<label asp-for="UserName">User name</label>
+			<input asp-for="UserName" class="form-control" placeholder="User name..">
+			<span asp-validation-for="UserName" class="small text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="UserImageUrl">Profile picture <span style="font-size: smaller; color: #888;">(Optional)</span></label>
+			<input asp-for="UserImageUrl" class="form-control" placeholder="User profile picture URL..">
+		</div>
+		<div class="form-group">
+			<label asp-for="Description">Description</label>
+			<textarea asp-for="Description" class="form-control" placeholder="Please share your experience or suggestions with us." style="height:150px"></textarea>
+			<span asp-validation-for="Description" class="small text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="Stars">How would you rate us?</label>
+			<body>
+				<div class="box">
+					<div class="stars">
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+					</div>
+				</div>
+			</body>
+		</div>
+
+		<input type="submit" value="Submit">
+	</form>
+</div>

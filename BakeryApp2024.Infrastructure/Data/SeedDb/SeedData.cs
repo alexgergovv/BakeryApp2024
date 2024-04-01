@@ -137,6 +137,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
                 ImageUrl = MascarponePastry.ImageUrl,
                 ProductId = 3,
                 Quantity = 1,
+                IsDeleted = false,
                 UserId = GuestUser.Id
             };
         }

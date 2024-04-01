@@ -4,11 +4,6 @@ using BakeryApp2024.Core.Models.Order;
 using BakeryApp2024.Infrastructure.Data.Common;
 using BakeryApp2024.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BakeryApp2024.Core.Services
 {
@@ -112,7 +107,7 @@ namespace BakeryApp2024.Core.Services
 			foreach (var item in items)
 			{
 				var current = await repository.AllReadOnly<BasketItem>()
-					.Where(i => i.UserId == userId && i.ProductName == item.ProductName)
+					.Where(i => i.UserId == userId && i.ProductName == item.ProductName && i.IsDeleted  == false)
 					.FirstOrDefaultAsync();
 
 				if (current != null)

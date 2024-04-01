@@ -1,7 +1,4 @@
-﻿using BakeryApp2024.Infrastructure.Data.Models;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BakeryApp2024.Core.Models.BasketItem
+﻿namespace BakeryApp2024.Core.Models.BasketItem
 {
 	public class ItemFormModel
 	{
