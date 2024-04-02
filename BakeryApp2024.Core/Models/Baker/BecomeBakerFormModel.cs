@@ -20,5 +20,8 @@ namespace BakeryApp2024.Core.Models.Baker
         [Display(Name = "Phone number")]
         [Phone]
         public string PhoneNumber { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = RequiredMessage)]
+        public string Gender {  get; set; } = string.Empty;
     }
 }

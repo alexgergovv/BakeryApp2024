@@ -40,7 +40,7 @@ namespace BakeryApp2024.Controllers
 				return View(model);
 			}
 
-			await bakerService.CreateAsync(User.Id(), model.Name, model.PhoneNumber);
+			await bakerService.CreateAsync(model, User.Id());
 
 			return RedirectToAction(nameof(ProductController.All), "Product");
 		}

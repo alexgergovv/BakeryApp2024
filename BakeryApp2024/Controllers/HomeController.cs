@@ -1,6 +1,7 @@
 ﻿using BakeryApp2024.Core.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Versioning;
 
 namespace BakeryApp2024.Controllers
 {
@@ -8,12 +9,15 @@ namespace BakeryApp2024.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService productService;
+        private readonly IBakerService bakerService;
 
         public HomeController(ILogger<HomeController> logger,
-            IProductService _productService)
+            IProductService _productService,
+            IBakerService _bakerService)
         {
             _logger = logger;
             productService = _productService;
+            bakerService = _bakerService;
         }
 
         [AllowAnonymous]
@@ -27,7 +31,9 @@ namespace BakeryApp2024.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Contacts()
         {
-            return View();
+            var bakers = await bakerService.GetAllAsChipModelAsync();
+
+            return View(bakers);
         }
 
         [AllowAnonymous]

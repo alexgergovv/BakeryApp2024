@@ -66,7 +66,8 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
                 Id = 1,
                 Name = "Buddy Valastro",
                 PhoneNumber = "+359562095974",
-                UserId = BakerUser.Id
+                UserId = BakerUser.Id,
+                Gender = "Male"
             };
         }
 

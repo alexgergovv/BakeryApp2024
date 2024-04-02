@@ -1,54 +1,181 @@
 ﻿@model IEnumerable<ProductIndexServiceModel>
 
 @{
-    ViewData["Title"] = "Home Page";
-    var products = Model.ToList();
+	ViewData["Title"] = "Home Page";
+	var products = Model.ToList();
 }
+
+<link rel="stylesheet" type="text/css" href="~/css/HomePage.css" />
+
+<header class="mainHeader">
+	<h1 class="mainTitle">Welcome to Dreamy Delights Bakery</h1>
+	<p class="mainDescription">
+		Immerse in the aroma of fresh-baked goodies with our Bakery website,
+		your perfect partner in discovering and ordering delightful treats from the comfort of your home.
+	</p>
+</header>
 
 @if (!products.Any())
 {
-    <div class="mt-4 p-5 bg-light">
-        <h1 class="display-4">Welcome to the best bakery ever!</h1>
-        <p class="lead">
-            There are no products in the system currently available
-            so why don't you just add one?
-        </p>
-        <hr class="my-4">
-        <p class="lead">
-            @if (User?.Identity?.IsAuthenticated ?? false)
-            {
-                <a asp-controller="Product" asp-action="Add" class="btn btn-primary btn-lg"
-                   role="button">Add Product</a>
-            }
-        </p>
-    </div>
+	<div class="mt-4 p-5 bg-light">
+		<p class="lead">
+			There are no products in the system currently available
+			so why don't you just add one?
+		</p>
+		<hr class="my-4">
+		<p class="lead">
+			@if (User?.Identity?.IsAuthenticated ?? false)
+			{
+				<a asp-controller="Product" asp-action="Add" class="btn btn-primary btn-lg"
+				   role="button">Add Product</a>
+			}
+		</p>
+	</div>
 }
 
 <div class="mb-5"></div>
 
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        @for (int i = 0; i < products.Count(); i++)
-        {
-            var product = products[i];
-            <div align="center" class="carousel-item @(i == 0 ? "active" : string.Empty)">
-                <img class="d-block w-100" style="height:650px"
-                     src="@product.ImageUrl" alt="@product.Name">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>
-                        <a class="btn btn-lg btn btn btn-warning" asp-controller="Product" asp-action="Details"
-                           asp-route-id="@product.Id"> @product.Name</a>
-                    </h5>
-                </div>
-            </div>
-        }
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+	<div class="carousel-inner">
+		@for (int i = 0; i < products.Count(); i++)
+		{
+			var product = products[i];
+			<div align="center" class="carousel-item @(i == 0 ? "active" : string.Empty)">
+				<img class="d-block w-100" style="height:650px"
+					 src="@product.ImageUrl" alt="@product.Name">
+				<div class="carousel-caption d-none d-md-block">
+					<h5>
+						<a class="btn btn-lg btn btn btn-warning" asp-controller="Product" asp-action="Details"
+						   asp-route-id="@product.Id"> @product.Name</a>
+					</h5>
+				</div>
+			</div>
+		}
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
 </div>
+
+<section class="specials">
+	<div class="specialsDiv">
+		<div class="headerSection">
+			<header>
+				<h2 class="specialsTitle">Our Specials</h2>
+				<p class="specialsDescription">
+					Treat your taste buds to special deals and seasonal favorites,
+					carefully crafted by our expert bakers.
+				</p>
+			</header>
+			<div class="buttonDiv">
+				<a asp-action="All" asp-controller="Product" class="btnSpecial">
+					<span>More Specials</span>
+				</a>
+			</div>
+		</div>
+		<div class="specialsSec">
+			<div class="specialItemDiv">
+				<svg xmlns="http://www.w3.org/2000/svg" class="um-icon _daed2175" fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
+					<path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"></path>
+				</svg>
+				<h3 class="specialT">Birthday Cakes</h3>
+				<div class="specialP">Customise and order the perfect cake for your loved ones' special day.</div>
+			</div>
+			<div class="specialItemDiv">
+				<svg xmlns="http://www.w3.org/2000/svg" class="um-icon _daed2175" fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
+					<path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.2 14.2L11 13V7h1.5v5.2l4.5 2.7-.8 1.3z"></path>
+				</svg>
+				<h3 class="specialT">Artisan Breads</h3>
+				<div class="specialP">Savor our selection of freshly baked artisanal breads, perfect for any meal.</div>
+			</div>
+			<div class="specialItemDiv">
+				<svg xmlns="http://www.w3.org/2000/svg" class="um-icon _daed2175" fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
+					<path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96z"></path>
+				</svg>
+				<h3 class="specialT">Sweet Treats</h3>
+				<div class="specialP">Indulge in a variety of confectioneries, from classic pastries to innovative desserts.</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="infoSection">
+	<div class="infoDiv">
+		<div class="divSection">
+			<header class="infoHeader">
+				<h2 class="infoTitle">Why Dreamy Delights Bakery?</h2>
+				<p class="infoP">
+					Explore the features that make Dreamy Delights Bakery the leading bakery app,
+					from curated menus, secure payment options, and real-time order tracking.
+				</p>
+			</header>
+			<ul class="infoUl">
+				<li class="infoLi">
+					<svg xmlns="http://www.w3.org/2000/svg" class="um-icon _fa151719" fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
+						<path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"></path>
+					</svg>
+					<div class="LiDiv">
+						<span class="infoSpan">Easy Order</span>
+						<span class="_76209d2b">
+							Choose from a variety of delectable baked goods with a
+							simple, user-friendly ordering system.
+						</span>
+					</div>
+				</li>
+				<li class="infoLi">
+					<svg xmlns="http://www.w3.org/2000/svg" class="um-icon _fa151719" fill="currentColor" height="24" width="24" viewBox="0 0 512 512">
+						<path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path>
+					</svg>
+					<div class="LiDiv">
+						<span class="infoSpan">Live Tracking</span>
+						<span class="_76209d2b">Track your order in real-time and get updates straight from the oven to your door.</span>
+					</div>
+				</li>
+				<li class="infoLi">
+					<svg xmlns="http://www.w3.org/2000/svg" class="um-icon _fa151719" fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
+						<path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path>
+					</svg>
+					<div class="LiDiv">
+						<span class="infoSpan">Secure Pay</span>
+						<span class="_76209d2b">Checkout securely with multiple payment options tailored to your convenience.</span>
+					</div>
+				</li>
+			</ul>
+			<a asp-controller="Product" asp-action="All" class="btnSpecial">
+				<span>Shop now</span>
+			</a>
+		</div>
+		<div class="divImage">
+			<img src="https://wellingtonnz.bynder.com/transform/2e3fb266-ef74-40f8-b8cc-63b232100f24/Jean-s-1?io=transform:fit,width:576" class="infoImg">
+		</div>
+	</div>
+</section>
+
+<section class="faqSection">
+	<header>
+		<h2 class="faqTitle">Help &amp; FAQs</h2>
+		<p class="faqDescription">Find quick answers to your questions about Dreamy Delights's app features, orders, and services.</p>
+	</header>
+	<div class="faqDiv">
+		<div class="faqItem">
+			<h4>How do I order?</h4>
+			<div>Simply open the Dreamy Delights website, select your items, and follow the checkout process.</div>
+		</div>
+		<div class="faqItem">
+			<h4>Can I customize?</h4>
+			<div>Yes, many of our bakery items can be customized to your preference through the app.</div>
+		</div><div class="faqItem">
+			<h4>What about allergies?</h4>
+			<div>Detailed ingredient lists and allergen information are provided for each item on the menu.</div>
+		</div>
+		<div class="faqItem">
+			<h4>Is there a delivery fee?</h4>
+			<div>There may be a small delivery fee based on your distance from the bakery.</div>
+		</div>
+	</div>
+</section>

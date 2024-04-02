@@ -25,6 +25,9 @@ namespace BakeryApp2024.Infrastructure.Data.Models
         public string PhoneNumber { get; set; } = string.Empty;
 
         [Required]
+        public string Gender {  get; set; } = string.Empty;
+
+        [Required]
         [Comment("User identifier")]
         public string UserId { get; set; } = string.Empty;
 

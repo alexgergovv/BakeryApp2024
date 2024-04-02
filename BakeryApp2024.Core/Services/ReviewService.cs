@@ -17,7 +17,7 @@ namespace BakeryApp2024.Core.Services
 		public async Task<IEnumerable<ReviewViewModel>> AllAsync()
 		{
 			return await repository.AllReadOnly<Review>()
-				.OrderByDescending(r => r.Id)
+				.OrderByDescending(r => r.Date)
 				.Select(r => new ReviewViewModel()
 				{
 					Id = r.Id,

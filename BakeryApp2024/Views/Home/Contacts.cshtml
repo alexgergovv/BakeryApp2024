@@ -1,44 +1,92 @@
-﻿@{
-    ViewBag.Title = "Contacts";
+﻿@model IEnumerable<BakerChipModel>
+
+@{
+	ViewBag.Title = "Contacts";
 }
 <h2 class="text-center" style="padding-top: 20px">@ViewData["Title"]</h2>
 <hr />
 
+
+
+<div style="align-items: center; text-align: center;">
+	<h3>Our bakery team</h3>
+	<p>For custom orders you can contact our bakers here!</p>
+</div>
+
+<div class="row d-flex justify-content-center">
+	@foreach (var baker in Model)
+	{
+		<partial name="_BakerPartial" model="@baker" />
+	}
+</div>
+
+<h3 style="text-align:center; padding-bottom: 10px; font-weight: 600;">Location</h3>
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        #map {
-            height: 500px;
-            width: 100%;
-        }
-    </style>
+	<style>
+		#map {
+			height: 500px;
+			width: 100%;
+		}
+	</style>
 </head>
 <body>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtOmz5Z-6krGPifwh8jBKs0YUXsmro6LU"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtOmz5Z-6krGPifwh8jBKs0YUXsmro6LU"></script>
 
-    <div id="map"></div>
-    <script>
-        function initMap() {
-            var coordinates = { lat: 42.689192988795014, lng: 23.318452722169145 };
+	<div id="map"></div>
+	<script>
+		function initMap() {
+			var coordinates = { lat: 42.689192988795014, lng: 23.318452722169145 };
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: coordinates,
-                zoom: 12 
-            });
+			var map = new google.maps.Map(document.getElementById('map'), {
+				center: coordinates,
+				zoom: 12
+			});
 
-            var marker = new google.maps.Marker({
-                position: coordinates,
-                map: map,
-                title: 'Your Location' 
-            });
-        }
-    </script>
+			var marker = new google.maps.Marker({
+				position: coordinates,
+				map: map,
+				title: 'Your Location'
+			});
+		}
+	</script>
 
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtOmz5Z-6krGPifwh8jBKs0YUXsmro6LU&callback=initMap">
-    </script>
+	<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtOmz5Z-6krGPifwh8jBKs0YUXsmro6LU&callback=initMap">
+	</script>
 
 </body>
 </html>
+
+<div style="align-items: center; text-align: center; padding-top: 20px;">
+	<h3>About us</h3>
+
+	<h5>
+		<i class="bi bi-telephone-fill">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+				<path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+			</svg>
+		</i>Bakery phone number
+	</h5>
+	<p>+359 847 2848</p>
+
+	<h5>
+		<i class="bi bi-geo-alt-fill">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+				<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+			</svg>
+		</i>Address
+	</h5>
+	<p>Sofia Center, Vitosha Blvd 62а, 1463 Sofia</p>
+
+	<h5>
+		<i class="bi bi-clock-fill">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
+				<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+			</svg>
+		</i>Working hours
+	</h5>
+	<p>Monday - Sunday 8 am - 8 pm</p>
+</div>
