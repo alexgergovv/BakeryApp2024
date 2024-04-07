@@ -1,8 +1,8 @@
 ﻿using BakeryApp2024.Attributes;
 using BakeryApp2024.Core.Contracts;
 using BakeryApp2024.Core.Models.Baker;
-using BakeryApp2024.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using static BakeryApp2024.Core.Constants.MessageConstants;
 
 namespace BakeryApp2024.Controllers

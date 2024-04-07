@@ -2,14 +2,13 @@
 using BakeryApp2024.Core.Contracts;
 using BakeryApp2024.Core.Extensions;
 using BakeryApp2024.Core.Models.Product;
-using BakeryApp2024.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
+using System.Security.Claims;
 
 namespace BakeryApp2024.Controllers
 {
-    public class ProductController : BaseController
+	public class ProductController : BaseController
 	{
 		private readonly IProductService productService;
 

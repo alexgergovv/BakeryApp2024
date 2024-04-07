@@ -1,6 +1,6 @@
 ﻿using BakeryApp2024.Core.Contracts;
-using BakeryApp2024.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BakeryApp2024.Controllers
 {

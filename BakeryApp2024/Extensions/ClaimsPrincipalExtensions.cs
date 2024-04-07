@@ -1,8 +1,6 @@
-﻿using System.Security.Claims;
-
-namespace BakeryApp2024.Extensions
+﻿namespace System.Security.Claims
 {
-    public static class ClaimsPrincipalExtensions
+	public static class ClaimsPrincipalExtensions
     {
         public static string Id(this ClaimsPrincipal user)
         {
