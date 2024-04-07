@@ -1,9 +1,11 @@
 ﻿using BakeryApp2024.Attributes;
 using BakeryApp2024.Core.Contracts;
+using BakeryApp2024.Core.Extensions;
 using BakeryApp2024.Core.Models.Product;
 using BakeryApp2024.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 namespace BakeryApp2024.Controllers
 {
@@ -44,7 +46,7 @@ namespace BakeryApp2024.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Details(int id)
+		public async Task<IActionResult> Details(int id, string information)
 		{
 			if (await productService.ExistsAsync(id) == false)
 			{
@@ -52,6 +54,11 @@ namespace BakeryApp2024.Controllers
             }
 
 			var model = await productService.ProductDetailsByIdAsync(id);
+
+			if (information != model.GetName())
+			{
+				return RedirectToAction("Error", "Home", new { statusCode = 400 });
+			}
 
 			return View(model);
 		}
@@ -111,7 +118,7 @@ namespace BakeryApp2024.Controllers
 
 			int newHouseId = await productService.CreateAsync(model, agentId ?? 0);
 
-			return RedirectToAction(nameof(Details), new { id = newHouseId });
+			return RedirectToAction(nameof(Details), new { id = newHouseId, Information = model.GetName() });
 		}
 
 		[HttpGet]
@@ -159,7 +166,7 @@ namespace BakeryApp2024.Controllers
 
 			await productService.EditAsync(id, model);
 
-			return RedirectToAction(nameof(Details), new { id });
+			return RedirectToAction(nameof(Details), new { id, Information = model.GetName() });
 		}
 
 

@@ -46,7 +46,7 @@
 				<div class="carousel-caption d-none d-md-block">
 					<h5>
 						<a class="btn btn-lg btn btn btn-warning" asp-controller="Product" asp-action="Details"
-						   asp-route-id="@product.Id"> @product.Name</a>
+						   asp-route-id="@product.Id" asp-route-information="@product.GetName()"> @product.Name</a>
 					</h5>
 				</div>
 			</div>
