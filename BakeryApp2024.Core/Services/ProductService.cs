@@ -192,6 +192,7 @@ namespace BakeryApp2024.Core.Services
 					 Price = p.Price,
 					 Baker = new Models.Baker.BakerServiceModel()
 					 {
+						 FullName = $"{p.Baker.User.FirstName} {p.Baker.User.LastName}",
 						 PhoneNumber = p.Baker.PhoneNumber,
 						 Email = p.Baker.User.Email
 					 },

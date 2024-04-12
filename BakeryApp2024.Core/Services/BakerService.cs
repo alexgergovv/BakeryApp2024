@@ -16,10 +16,11 @@ namespace BakeryApp2024.Core.Services
 
         public async Task CreateAsync(BecomeBakerFormModel model, string userId)
         {
+            var user = await GetUserByIdAsync(userId);
             await repository.AddAsync(new Baker()
             {
                 UserId = userId,
-                Name = model.Name,
+                Name = $"{user.FirstName} {user.LastName}",
                 PhoneNumber = model.PhoneNumber,
                 Gender = model.Gender
             });
@@ -39,7 +40,7 @@ namespace BakeryApp2024.Core.Services
                 .Where(b => string.IsNullOrEmpty(b.Name) == false)
                 .Select(b => new BakerChipModel()
                 {
-                    Name = b.Name,
+                    FullName = $"{b.User.FirstName} {b.User.LastName}",
                     PhoneNumber = b.PhoneNumber,
                     Gender = b.Gender
                 })
@@ -71,5 +72,12 @@ namespace BakeryApp2024.Core.Services
             return await repository.AllReadOnly<Baker>()
                 .AnyAsync(b => b.PhoneNumber == phoneNumber);
         }
-    }
+
+		public async Task<ApplicationUser> GetUserByIdAsync(string id)
+		{
+			return await repository.AllReadOnly<ApplicationUser>()
+                .Where(a =>  a.Id == id)
+                .FirstAsync();
+		}
+	}
 }
