@@ -1,4 +1,7 @@
-﻿@model IEnumerable<ReviewViewModel>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<ReviewViewModel>
+@inject SignInManager<IdentityUser> SignInManager
+@inject IBakerService bakerService
 
 @if (!Model.Any())
 {
@@ -21,7 +24,10 @@
 
 <body>
 	<div class="container1">
-		<a asp-controller="Review" asp-action="Add" type="button" class="btn button-like btn-outline-primary top-right-button">Add review</a>
+		@if (SignInManager.IsSignedIn(User) && (await bakerService.ExistsByIdAsync(User.Id()) == false))
+		{
+			<a asp-controller="Review" asp-action="Add" type="button" class="btn button-like btn-outline-primary top-right-button">Add review</a>
+		}
 		<h2> Our Happy Clients </h2>
 		<p class="description1">
 			Here you can see all of the amazing reviews about our bakery! 
