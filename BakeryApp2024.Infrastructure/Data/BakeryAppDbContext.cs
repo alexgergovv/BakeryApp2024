@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BakeryApp2024.Infrastructure.Data
 {
-	public class BakeryAppDbContext : IdentityDbContext
+	public class BakeryAppDbContext : IdentityDbContext<ApplicationUser>
 	{
 		public BakeryAppDbContext(DbContextOptions<BakeryAppDbContext> options)
 			: base(options)

@@ -5,8 +5,8 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 {
     internal class SeedData
     {
-        public IdentityUser BakerUser { get; set; }
-        public IdentityUser GuestUser { get; set; }
+        public ApplicationUser BakerUser { get; set; }
+        public ApplicationUser GuestUser { get; set; }
         public Baker Baker { get; set; }
         public Category BreadCategory { get; set; }
         public Category PastryCategory { get; set; }
@@ -32,9 +32,9 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 
         private void SeedUsers()
         {
-            var hasher = new PasswordHasher<IdentityUser>();
+            var hasher = new PasswordHasher<ApplicationUser>();
 
-            BakerUser = new IdentityUser()
+            BakerUser = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d8395082",
                 UserName = "baker@mail.com",
@@ -46,7 +46,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
             BakerUser.PasswordHash =
                  hasher.HashPassword(BakerUser, "baker123");
 
-            GuestUser = new IdentityUser()
+            GuestUser = new ApplicationUser()
             {
                 Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 UserName = "guest@mail.com",

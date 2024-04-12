@@ -41,9 +41,14 @@
         public const int ZipCodeMaxValue = 99950;
         public const int ZipCodeMinValue = 501;
 
-        public const int UserNameMaxLength = 50;
-        public const int UserNameMinLength = 4;
-        public const int ReviewDescriptionMaxLength = 200;
+        public const int UserFirstNameMaxLength = 15;
+        public const int UserFirstNameMinLength = 3;
+		public const int UserLastNameMaxLength = 20;
+		public const int UserLastNameMinLength = 4;
+		public const int ReviewDescriptionMaxLength = 200;
 		public const int ReviewDescriptionMinLength = 5;
+
+        public const int ReviewerNameMaxLength = 40;
+        public const int ReviewerNameMinLength = 4;
 	}
 }

@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static BakeryApp2024.Infrastructure.Constants.DataConstants;
 
 namespace BakeryApp2024.Infrastructure.Data.Models
 {
-    [Index(nameof(PhoneNumber), IsUnique = true)]
+	[Index(nameof(PhoneNumber), IsUnique = true)]
     [Comment("Product Baker")]
     public class Baker
     {
@@ -32,7 +31,7 @@ namespace BakeryApp2024.Infrastructure.Data.Models
         public string UserId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         public List<Product> Products { get; set; } = new List<Product>();
     }

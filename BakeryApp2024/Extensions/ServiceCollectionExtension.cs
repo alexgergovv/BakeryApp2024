@@ -2,12 +2,12 @@
 using BakeryApp2024.Core.Services;
 using BakeryApp2024.Infrastructure.Data;
 using BakeryApp2024.Infrastructure.Data.Common;
-using Microsoft.AspNetCore.Identity;
+using BakeryApp2024.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class ServiceCollectionExtension
+	public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
@@ -34,7 +34,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireNonAlphanumeric = false;

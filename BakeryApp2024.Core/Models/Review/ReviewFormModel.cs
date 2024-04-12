@@ -7,10 +7,11 @@ namespace BakeryApp2024.Core.Models.Review
 	public class ReviewFormModel
 	{
 		[Required(ErrorMessage = RequiredMessage)]
-		[StringLength(UserNameMaxLength,
-			MinimumLength = UserNameMinLength,
+		[StringLength(ReviewerNameMaxLength,
+			MinimumLength = ReviewerNameMinLength,
 			ErrorMessage = LengthMessage)]
 		public string UserName { get; set; } = string.Empty;
+
 		[Required(ErrorMessage = RequiredMessage)]
 		[StringLength(ReviewDescriptionMaxLength,
 			MinimumLength = ReviewDescriptionMinLength,

@@ -21,7 +21,7 @@ namespace BakeryApp2024.Core.Services
 				.Select(r => new ReviewViewModel()
 				{
 					Id = r.Id,
-					UserName = r.UserName,
+					UserName = r.User.FirstName + " " + r.User.LastName,
 					Description = r.Description,
 					Date = r.Date.ToShortDateString(),
 					UserImageUrl = r.UserImageUrl,

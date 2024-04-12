@@ -13,7 +13,7 @@ namespace BakeryApp2024.Infrastructure.Data.Models
 		public int Id { get; set; }
 
 		[Required]
-		[MaxLength(UserNameMaxLength)]
+		[MaxLength(ReviewerNameMaxLength)]
 		[Comment("User's name")]
 		public string UserName { get; set; } = null!;
 
@@ -37,6 +37,6 @@ namespace BakeryApp2024.Infrastructure.Data.Models
 		public string UserId { get; set; } = string.Empty;
 
 		[ForeignKey(nameof(UserId))]
-		public IdentityUser User { get; set; } = null!;
+		public ApplicationUser User { get; set; } = null!;
 	}
 }
