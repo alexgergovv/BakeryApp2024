@@ -70,6 +70,12 @@ namespace BakeryApp2024.Controllers
 				return RedirectToAction("Error", "Home", new { statusCode = 400 });
 			}
 
+			if (await bakerService.ExistsByIdAsync(User.Id())  
+				&& User.IsAdmin() == false)
+			{
+				return RedirectToAction("Error", "Home", new { statusCode = 401 });
+			}
+
 			var product = await productService.GetByIdAsync(id);
 
 			if (await basketItemService.ProductItemExistsByIdAsync(product.Id, User.Id()) == false)
@@ -128,7 +134,8 @@ namespace BakeryApp2024.Controllers
                 return RedirectToAction("Error", "Home", new { statusCode = 400 });
             }
 
-			if (await productService.HasBakerWithIdAsync(id, User.Id()) == false)
+			if (await productService.HasBakerWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
 			{
                 return RedirectToAction("Error", "Home", new { statusCode = 401 });
             }
@@ -146,7 +153,8 @@ namespace BakeryApp2024.Controllers
                 return RedirectToAction("Error", "Home", new { statusCode = 400 });
             }
 
-			if (await productService.HasBakerWithIdAsync(id, User.Id()) == false)
+			if (await productService.HasBakerWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
 			{
                 return RedirectToAction("Error", "Home", new { statusCode = 401 });
             }
@@ -177,7 +185,8 @@ namespace BakeryApp2024.Controllers
                 return RedirectToAction("Error", "Home", new { statusCode = 400 });
             }
 
-            if (await productService.HasBakerWithIdAsync(id, User.Id()) == false)
+            if (await productService.HasBakerWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
             {
 				return RedirectToAction("Error", "Home", new { statusCode = 401 });
             }
@@ -203,7 +212,8 @@ namespace BakeryApp2024.Controllers
                 return RedirectToAction("Error", "Home", new { statusCode = 400 });
             }
 
-            if (await productService.HasBakerWithIdAsync(model.Id, User.Id()) == false)
+            if (await productService.HasBakerWithIdAsync(model.Id, User.Id()) == false
+				&& User.IsAdmin() == false)
             {
                 return RedirectToAction("Error", "Home", new { statusCode = 401 });
             }

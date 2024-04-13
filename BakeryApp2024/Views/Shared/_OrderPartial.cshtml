@@ -14,6 +14,7 @@
 							<p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
 							<p class="small text-muted mb-0">Order No. : @Model.Number</p>
 						</div>
+
 						@foreach (var item in Model.BasketItems)
 						{
 							<partial name="_ItemsFromOrderPartial" model="@item" />

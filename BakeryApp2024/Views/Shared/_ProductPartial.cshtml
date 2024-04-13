@@ -23,7 +23,8 @@
 			</a>
 			@if (this.User.Identity.IsAuthenticated)
 			{
-				if (await productService.HasBakerWithIdAsync(Model.Id, User.Id()))
+				if (await productService.HasBakerWithIdAsync(Model.Id, User.Id()) 
+				|| User.IsAdmin())
 				{
 					<a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
 					   class="btn btn-warning">
@@ -45,7 +46,7 @@
 					</a>
 				}
 				<p></p>
-				if ((await bakerService.ExistsByIdAsync(User.Id())) == false)
+				if ((await bakerService.ExistsByIdAsync(User.Id())) == false || User.IsAdmin())
 				{
 					<form class="input-group-sm" asp-controller="Product"
 						  asp-action="Buy" asp-route-id="@Model.Id" method="post">
