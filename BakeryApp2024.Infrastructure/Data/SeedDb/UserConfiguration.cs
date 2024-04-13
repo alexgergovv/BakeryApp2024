@@ -10,7 +10,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
         {
             var data = new SeedData();
 
-            builder.HasData(new ApplicationUser[] { data.BakerUser, data.GuestUser });
+            builder.HasData(new ApplicationUser[] { data.BakerUser, data.GuestUser, data.AdminUser });
         }
     }
 }

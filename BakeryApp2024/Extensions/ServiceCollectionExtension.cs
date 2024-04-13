@@ -3,6 +3,7 @@ using BakeryApp2024.Core.Services;
 using BakeryApp2024.Infrastructure.Data;
 using BakeryApp2024.Infrastructure.Data.Common;
 using BakeryApp2024.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -42,6 +43,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
             })
+                .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<BakeryAppDbContext>();
             return services;
         }

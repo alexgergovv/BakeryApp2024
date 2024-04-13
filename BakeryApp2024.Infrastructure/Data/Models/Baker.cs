@@ -14,11 +14,6 @@ namespace BakeryApp2024.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(BakerNameMaxLength)]
-        [Comment("Baker name")]
-        public string Name { get; set; } = string.Empty;
-
-        [Required]
         [MaxLength(BakerPhoneNumberMaxLength)]
         [Comment("Baker's phone number")]
         public string PhoneNumber { get; set; } = string.Empty;

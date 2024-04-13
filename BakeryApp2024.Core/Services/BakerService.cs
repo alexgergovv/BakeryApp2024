@@ -20,7 +20,6 @@ namespace BakeryApp2024.Core.Services
             await repository.AddAsync(new Baker()
             {
                 UserId = userId,
-                Name = $"{user.FirstName} {user.LastName}",
                 PhoneNumber = model.PhoneNumber,
                 Gender = model.Gender
             });
@@ -37,7 +36,6 @@ namespace BakeryApp2024.Core.Services
 		public async Task<IEnumerable<BakerChipModel>> GetAllAsChipModelAsync()
 		{
             var bakers = await repository.AllReadOnly<Baker>()
-                .Where(b => string.IsNullOrEmpty(b.Name) == false)
                 .Select(b => new BakerChipModel()
                 {
                     FullName = $"{b.User.FirstName} {b.User.LastName}",
