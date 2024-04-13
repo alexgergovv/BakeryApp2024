@@ -16,18 +16,19 @@ namespace BakeryApp2024.Core.Services
         public async Task<StatisticServiceModel> TotalAsync()
 		{
 			int totalProducts = await repository.AllReadOnly<Product>()
+				.Where(p => p.IsApproved)
 				.CountAsync();
 
 			int breadProductsCount = await repository.AllReadOnly<Product>()
-				.Where(p => p.Category.Name == "Bread")
+				.Where(p => p.Category.Name == "Bread" && p.IsApproved)
 				.CountAsync();
 
 			int pastryProductsCount = await repository.AllReadOnly<Product>()
-				.Where(p => p.Category.Name == "Pastry")
+				.Where(p => p.Category.Name == "Pastry" && p.IsApproved)
 				.CountAsync();
 
 			int cakeProductsCount = await repository.AllReadOnly<Product>()
-				.Where(p => p.Category.Name == "Cake")
+				.Where(p => p.Category.Name == "Cake" && p.IsApproved)
 				.CountAsync();
 
 			return new StatisticServiceModel()

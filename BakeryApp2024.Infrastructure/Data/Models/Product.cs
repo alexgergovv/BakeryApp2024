@@ -31,6 +31,9 @@ namespace BakeryApp2024.Infrastructure.Data.Models
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
 
+        [Comment("Is product approved by admin")]
+        public bool IsApproved { get; set; }
+
         [Required]
         [Comment("Category identifier")]
         public int CategoryId { get; set; }

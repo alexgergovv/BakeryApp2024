@@ -18,7 +18,8 @@ namespace BakeryApp2024.Core.Services
 
         public async Task<ProductQueryServiceModel> AllAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.NameAlphabetically, int currentPage = 1, int productsPerPage = 3)
         {
-			var productsToShow = repository.AllReadOnly<Product>();
+			var productsToShow = repository.AllReadOnly<Product>()
+				.Where(p => p.IsApproved);
 
 			if (category != null)
 			{
@@ -95,6 +96,7 @@ namespace BakeryApp2024.Core.Services
 				Price = model.Price,
 				CategoryId = model.CategoryId,
 				BakerId = bakerId,
+				IsApproved = false
 			};
 
 			await repository.AddAsync(product);
@@ -140,7 +142,7 @@ namespace BakeryApp2024.Core.Services
 		public async Task<ProductFormModel?> GetProductFormModelByIdAsync(int id)
 		{
 			var product = await repository.AllReadOnly<Product>()
-				.Where(p => p.Id == id)
+				.Where(p => p.Id == id && p.IsApproved)
 				.Select(p => new ProductFormModel()
 				{
 					Name = p.Name,
@@ -163,6 +165,7 @@ namespace BakeryApp2024.Core.Services
 		{
 			return await repository
 				.AllReadOnly<Product>()
+				.Where (p => p.IsApproved)
 				.Take(3)
 				.Select(p => new ProductIndexServiceModel()
 				{
@@ -183,7 +186,7 @@ namespace BakeryApp2024.Core.Services
 		public async Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id)
         {
 			return await repository.AllReadOnly<Product>()
-				 .Where(p => p.Id == id)
+				 .Where(p => p.Id == id && p.IsApproved)
 				 .Select(p => new ProductDetailsServiceModel()
 				 {
 					 Id = id,
@@ -201,7 +204,5 @@ namespace BakeryApp2024.Core.Services
 				 })
 				 .FirstAsync();
         }
-
-
     }
 }
