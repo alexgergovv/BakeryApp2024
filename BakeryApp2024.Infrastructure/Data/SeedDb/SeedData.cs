@@ -1,13 +1,17 @@
 ﻿using BakeryApp2024.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using static BakeryApp2024.Infrastructure.Constants.CustomClaims;
 
 namespace BakeryApp2024.Infrastructure.Data.SeedDb
 {
 	internal class SeedData
 	{
 		public ApplicationUser BakerUser { get; set; }
+		public IdentityUserClaim<string> BakerUserClaim { get; set; }
 		public ApplicationUser GuestUser { get; set; }
+		public IdentityUserClaim<string> GuestUserClaim { get; set; }
 		public ApplicationUser AdminUser { get; set; }
+		public IdentityUserClaim<string> AdminUserClaim { get; set; }
 		public Baker Baker { get; set; }
 		public Baker AdminBaker { get; set; }
 		public Category BreadCategory { get; set; }
@@ -47,6 +51,14 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 				LastName = "Bakerov"
 			};
 
+			BakerUserClaim = new IdentityUserClaim<string>
+			{
+				Id = 1,
+				ClaimType = UserFullNameClaim,
+				ClaimValue = "Baker Bakerov",
+				UserId = "dea12856-c198-4129-b3f3-b893d8395082",
+			};
+
 			BakerUser.PasswordHash =
 				 hasher.HashPassword(BakerUser, "baker123");
 
@@ -61,6 +73,14 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 				LastName = "Guestov"
 			};
 
+			GuestUserClaim = new IdentityUserClaim<string>
+			{
+				Id = 2,
+				ClaimType = UserFullNameClaim,
+				ClaimValue = "Guest Guestov",
+				UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+			};
+
 			GuestUser.PasswordHash =
 			hasher.HashPassword(GuestUser, "guest123");
 
@@ -73,6 +93,14 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 				NormalizedEmail = "ADMIN@MAIL.COM",
 				FirstName = "Great",
 				LastName = "Admin"
+			};
+
+			AdminUserClaim = new IdentityUserClaim<string>
+			{
+				Id = 3,
+				ClaimType = UserFullNameClaim,
+				ClaimValue = "Great Admin",
+				UserId = "b4c615e6-d99c-480f-b6c7-9f95a0c7dd06",
 			};
 
 			AdminUser.PasswordHash =

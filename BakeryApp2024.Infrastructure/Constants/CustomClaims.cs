@@ -1,4 +1,4 @@
-﻿namespace BakeryApp2024.Core.Constants
+﻿namespace BakeryApp2024.Infrastructure.Constants
 {
 	public static class CustomClaims
 	{

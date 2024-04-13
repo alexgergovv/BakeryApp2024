@@ -13,7 +13,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using static BakeryApp2024.Infrastructure.Constants.DataConstants;
-using static BakeryApp2024.Core.Constants.CustomClaims;
+using static BakeryApp2024.Infrastructure.Constants.CustomClaims;
 
 namespace BakeryApp2024.Areas.Identity.Pages.Account
 {

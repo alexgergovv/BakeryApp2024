@@ -22,6 +22,7 @@ namespace BakeryApp2024.Infrastructure.Data
 			builder.ApplyConfiguration(new OrderConfiguration());
 			builder.ApplyConfiguration(new BasketItemConfiguration());
 			builder.ApplyConfiguration(new ReviewConfiguration());
+			builder.ApplyConfiguration(new UserClaimsConfiguration());
 
 			base.OnModelCreating(builder);
 		}

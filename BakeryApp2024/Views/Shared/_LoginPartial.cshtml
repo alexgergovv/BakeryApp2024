@@ -10,7 +10,7 @@
 	if (SignInManager.IsSignedIn(User))
 	{
 		var user = await UserManager.FindByIdAsync(User.Id());
-		userName = User.FindFirstValue(BakeryApp2024.Core.Constants.CustomClaims.UserFullNameClaim) ?? string.Empty;
+		userName = User.FindFirstValue(BakeryApp2024.Infrastructure.Constants.CustomClaims.UserFullNameClaim) ?? string.Empty;
 	}
 }
 

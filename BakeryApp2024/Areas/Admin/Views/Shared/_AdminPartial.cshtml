@@ -8,7 +8,7 @@
 
 	if (SignInManager.IsSignedIn(User))
 	{
-		userName = User.FindFirstValue(BakeryApp2024.Core.Constants.CustomClaims.UserFullNameClaim) ?? string.Empty;
+		userName = User.FindFirstValue(BakeryApp2024.Infrastructure.Constants.CustomClaims.UserFullNameClaim) ?? string.Empty;
 	}
 }
 
