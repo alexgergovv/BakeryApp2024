@@ -4,6 +4,7 @@ using BakeryApp2024.Core.Models.Order;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static BakeryApp2024.Core.Constants.MessageConstants;
 
 namespace BakeryApp2024.Controllers
 {
@@ -31,7 +32,9 @@ namespace BakeryApp2024.Controllers
 		{
 			await basketItemService.DeleteAsync(id);
 
-			return RedirectToAction("Mine");
+            TempData[UserMessageSuccess] = "Product removed from basket!";
+
+            return RedirectToAction("Mine");
 		}
 
 		[HttpGet]
@@ -56,6 +59,8 @@ namespace BakeryApp2024.Controllers
 			}
 
             await basketItemService.EditAsync(id, model);
+
+            TempData[UserMessageSuccess] = "Product quantity updated successfully!";
 
             return RedirectToAction(nameof(Mine));
         }

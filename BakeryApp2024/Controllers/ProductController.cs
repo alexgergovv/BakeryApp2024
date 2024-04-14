@@ -5,6 +5,7 @@ using BakeryApp2024.Core.Models.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static BakeryApp2024.Core.Constants.MessageConstants;
 
 namespace BakeryApp2024.Controllers
 {
@@ -113,7 +114,9 @@ namespace BakeryApp2024.Controllers
 				await basketItemService.IncreaseQuantity(item.Id);
 			}
 
-			return RedirectToAction(nameof(BasketItemController.Mine), "BasketItem");
+            TempData[UserMessageSuccess] = "Product successfully added to basket!";
+
+            return RedirectToAction(nameof(All));
 		}
 
 		[HttpGet]
