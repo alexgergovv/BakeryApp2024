@@ -70,6 +70,7 @@ namespace BakeryApp2024.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
 		public async Task<IActionResult> Details(int id, string information)
 		{
 			if (await productService.ExistsAsync(id) == false)
