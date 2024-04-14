@@ -1,6 +1,6 @@
 ﻿using BakeryApp2024.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
-using static BakeryApp2024.Core.Constants.RoleConstants;
+using static BakeryApp2024.Core.Constants.AdministratorConstants;
 
 namespace Microsoft.AspNetCore.Builder
 {

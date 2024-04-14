@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
-using static BakeryApp2024.Core.Constants.RoleConstants;
+using static BakeryApp2024.Core.Constants.AdministratorConstants;
 
 namespace BakeryApp2024.Areas.Identity.Pages.Account
 {

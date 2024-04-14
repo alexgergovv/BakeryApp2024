@@ -1,0 +1,21 @@
+﻿@model ProductServiceModel
+@inject IBakerService bakerService
+@inject IProductService productService
+
+<div class="col-md-4">
+    <div class="card mb-3">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="Product Image">
+        <div class="card-body text-center">
+            <h4>@Model.Name</h4>
+            <h6>
+                Price:
+                <b>@String.Format("{0:f2}", Model.Price) BGN</b>
+            </h6>
+            <br />
+            <form class="input-group-sm" asp-controller="Product"
+                  asp-area="Admin" asp-action="Approve" asp-route-houseId="@Model.Id" method="post">
+                <input class="btn btn-success" type="submit" value="Approve" />
+            </form>
+        </div>
+    </div>
+</div>

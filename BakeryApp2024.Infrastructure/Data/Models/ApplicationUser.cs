@@ -15,5 +15,7 @@ namespace BakeryApp2024.Infrastructure.Data.Models
 		[MaxLength(UserLastNameMaxLength)]
 		[PersonalData]
 		public string LastName { get; set; } = string.Empty;
-	}
+
+        public Baker? Baker { get; set; }
+    }
 }

@@ -45,6 +45,30 @@ namespace BakeryApp2024.Controllers
 		}
 
 		[HttpGet]
+		public async Task<IActionResult> Mine()
+		{
+			var userId = User.Id();
+			IEnumerable<ProductServiceModel> model;
+
+			if (User.IsAdmin())
+			{
+				return RedirectToAction("Mine", "Product", new { area = "Admin" });
+			}
+
+			if (await bakerService.ExistsByIdAsync(userId))
+			{
+				int bakerId = await bakerService.GetBakerIdAsync(userId) ?? 0;
+				model = await productService.AllProductsByBakerIdAsync(bakerId);
+			}
+			else
+			{
+				model = null;
+			}
+
+			return View(model);
+		}
+
+		[HttpGet]
 		public async Task<IActionResult> Details(int id, string information)
 		{
 			if (await productService.ExistsAsync(id) == false)

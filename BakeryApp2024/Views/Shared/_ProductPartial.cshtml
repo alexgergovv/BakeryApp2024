@@ -12,7 +12,7 @@
 				<b>@String.Format("{0:f2}", Model.Price) BGN</b>
 			</h6>
 			<br />
-			<a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id"
+			<a asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id"
 			   asp-route-information="@Model.GetName()" class="btn btn-info">
 				<i class="bi bi-info-circle">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
@@ -26,7 +26,7 @@
 				if (await productService.HasBakerWithIdAsync(Model.Id, User.Id()) 
 				|| User.IsAdmin())
 				{
-					<a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
+					<a asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
 					   class="btn btn-warning">
 						<i class="bi bi-pencil-square">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -35,7 +35,7 @@
 							</svg>
 						</i>Edit
 					</a>
-					<a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
+					<a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
 					   class="btn btn-danger">
 						<i class="bi bi-trash">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -48,7 +48,7 @@
 				<p></p>
 				if ((await bakerService.ExistsByIdAsync(User.Id())) == false || User.IsAdmin())
 				{
-					<form class="input-group-sm" asp-controller="Product"
+					<form class="input-group-sm" asp-area="" asp-controller="Product"
 						  asp-action="Buy" asp-route-id="@Model.Id" method="post">
 						<input class="btn btn-primary" style="width:6rem; height: 2rem" type="submit" value="Buy" />
 					</form>
