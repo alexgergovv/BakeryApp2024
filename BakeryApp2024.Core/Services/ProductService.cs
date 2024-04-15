@@ -5,7 +5,6 @@ using BakeryApp2024.Core.Models.Product;
 using BakeryApp2024.Infrastructure.Data.Common;
 using BakeryApp2024.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace BakeryApp2024.Core.Services
 {
@@ -187,6 +186,7 @@ namespace BakeryApp2024.Core.Services
             return await repository
                 .AllReadOnly<Product>()
                 .Where(p => p.IsApproved)
+                .OrderBy(p => p.Id)
                 .Take(3)
                 .Select(p => new ProductIndexServiceModel()
                 {

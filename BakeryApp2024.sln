@@ -5,9 +5,11 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakeryApp2024", "BakeryApp2024\BakeryApp2024.csproj", "{7C075796-87DA-4CF7-884E-D8087F8B8A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BakeryApp2024.Core", "BakeryApp2024.Core\BakeryApp2024.Core.csproj", "{BC8490A3-0B65-49A3-B97C-227D0406EF8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakeryApp2024.Core", "BakeryApp2024.Core\BakeryApp2024.Core.csproj", "{BC8490A3-0B65-49A3-B97C-227D0406EF8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BakeryApp2024.Infrastructure", "BakeryApp2024.Infrastructure\BakeryApp2024.Infrastructure.csproj", "{27EEFD67-985F-4EFA-BF43-7E2F6F312C03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakeryApp2024.Infrastructure", "BakeryApp2024.Infrastructure\BakeryApp2024.Infrastructure.csproj", "{27EEFD67-985F-4EFA-BF43-7E2F6F312C03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BakeryApp2024.Tests", "BakeryApp2024.Tests\BakeryApp2024.Tests.csproj", "{FCDCE856-83B4-4CD9-8A02-9D7188D0729A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{27EEFD67-985F-4EFA-BF43-7E2F6F312C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27EEFD67-985F-4EFA-BF43-7E2F6F312C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27EEFD67-985F-4EFA-BF43-7E2F6F312C03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCDCE856-83B4-4CD9-8A02-9D7188D0729A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCDCE856-83B4-4CD9-8A02-9D7188D0729A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCDCE856-83B4-4CD9-8A02-9D7188D0729A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCDCE856-83B4-4CD9-8A02-9D7188D0729A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

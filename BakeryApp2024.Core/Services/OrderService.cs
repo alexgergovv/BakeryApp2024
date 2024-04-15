@@ -16,6 +16,7 @@ namespace BakeryApp2024.Core.Services
             repository = _repository;
         }
 
+		//We already have 1 order into  the database
 		public async Task CreateAsync(OrderFormModel model, string userId)
 		{
 			int number = GetRandomNumber();
