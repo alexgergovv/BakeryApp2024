@@ -63,23 +63,24 @@
 </div>
 
 <div class="mb-5"></div>
-
-<div class="row">
-	<div class="col-12 text-center">
-		<button class="btn btn-primary" id="statistics-button">Show Statistics</button>
-	</div>
-</div>
-
-<div class="mt-4 p-5 bg-light d-none" id="statistics">
+@if (User.IsAdmin())
+{
 	<div class="row">
-		<h2 class="col-md-2 text-center" id="total-products"></h2>
-		<h2 class="col-md-2 text-center" id="total-breadProducts"></h2>
-		<h2 class="col-md-2 text-center" id="total-pastryProducts"></h2>
-		<h2 class="col-md-2 text-center" id="total-cakeProducts"></h2>
+		<div class="col-12 text-center">
+			<button class="btn btn-primary" id="statistics-button">Show Statistics</button>
+		</div>
 	</div>
-</div>
 
-@section Scripts {
+	<div class="mt-4 p-5 bg-light d-none" id="statistics">
+		<div class="row">
+			<h2 class="col-md-2 text-center" id="total-products"></h2>
+			<h2 class="col-md-2 text-center" id="total-breadProducts"></h2>
+			<h2 class="col-md-2 text-center" id="total-pastryProducts"></h2>
+			<h2 class="col-md-2 text-center" id="total-cakeProducts"></h2>
+		</div>
+	</div>
+
+	@section Scripts {
 	<script>
 		$('#statistics-button').on('click', ev => {
 			$.get('/api/statistic', data => {
@@ -92,6 +93,7 @@
 			});
 		});
 	</script>
+	}
 }
 
 <section class="specials">
