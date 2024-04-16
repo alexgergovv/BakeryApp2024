@@ -8,8 +8,8 @@ builder.Services.AddApplicationIdentity(builder.Configuration);
 
 builder.Services.AddControllersWithViews(options =>
 {
-	options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
-	options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
 
 builder.Services.AddApplicationServices();
@@ -19,14 +19,14 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseDeveloperExceptionPage();
-	app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
+    app.UseMigrationsEndPoint();
 }
 else
 {
-	app.UseExceptionHandler("/Home/Error/500");
-	app.UseStatusCodePagesWithRedirects("Home/Error?statusCode={0}");
-	app.UseHsts();
+    app.UseExceptionHandler("/Home/Error/500");
+    app.UseStatusCodePagesWithRedirects("Home/Error?statusCode={0}");
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -39,11 +39,11 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-	endpoints.MapControllerRoute(
-		name: "Product Details",
-		pattern: "/Product/Details/{id}/{information}",
-		defaults: new { Controller = "Product", Action = "Details" }
-	);
+    endpoints.MapControllerRoute(
+        name: "Product Details",
+        pattern: "/Product/Details/{id}/{information}",
+        defaults: new { Controller = "Product", Action = "Details" }
+    );
 
     endpoints.MapControllerRoute(
            name: "areas",
@@ -51,7 +51,7 @@ app.UseEndpoints(endpoints =>
     );
 
     endpoints.MapDefaultControllerRoute();
-	endpoints.MapRazorPages();
+    endpoints.MapRazorPages();
 });
 
 await app.CreateAdminRoleAsync();

@@ -203,7 +203,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 			{
 				Id = 1,
 				Number = 123456789,
-				TotalPrice = 0.00M,
+				TotalPrice = 7.00M,
 				CustomerName = "Gabriel Marinov",
 				CustomerAddress = "Tsar Simeon 123",
 				ZipCode = 1000,
@@ -212,7 +212,8 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 				CustomerEmail = "gabrielmar284@mail.com",
 				Date = DateTime.Now,
 				Status = "Pending",
-				UserId = GuestUser.Id
+				UserId = GuestUser.Id,
+				BasketItemIds = "14"
 			};
 		}
 
