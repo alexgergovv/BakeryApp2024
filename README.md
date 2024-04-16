@@ -42,7 +42,7 @@ Responsive Design
 Bootstrap
 jQuery
 
-⚙️ ###Application Configurations
+⚙️ Application Configurations
 1. The Connection string
 is in secrets.json.
 
