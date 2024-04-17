@@ -10,7 +10,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 		{
 			var data = new SeedData();
 
-			builder.HasData(new BasketItem[] { data.BasketItem });
+			builder.HasData(new BasketItem[] { data.BasketItem, data.VisibleBasketItem });
 		}
 	}
 }

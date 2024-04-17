@@ -23,7 +23,9 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 
 		public Order GuestUserOrder { get; set; }
 		public BasketItem BasketItem { get; set; }
-		public Review UserReview { get; set; }
+		public BasketItem VisibleBasketItem { get; set; }
+
+        public Review UserReview { get; set; }
 
 		public SeedData()
 		{
@@ -187,7 +189,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 		{
 			BasketItem = new BasketItem()
 			{
-				Id = 14,
+				Id = 1,
 				ProductName = MascarponePastry.Name,
 				Price = MascarponePastry.Price,
 				ImageUrl = MascarponePastry.ImageUrl,
@@ -196,7 +198,19 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 				IsDeleted = false,
 				UserId = GuestUser.Id
 			};
-		}
+
+            VisibleBasketItem = new BasketItem()
+            {
+                Id = 2,
+                ProductName = RaffaelloCake.Name,
+                Price = RaffaelloCake.Price,
+                ImageUrl = RaffaelloCake.ImageUrl,
+                ProductId = 1,
+                Quantity = 1,
+                IsDeleted = false,
+                UserId = GuestUser.Id
+            };
+        }
 		private void SeedOrder()
 		{
 			GuestUserOrder = new Order()
@@ -213,7 +227,7 @@ namespace BakeryApp2024.Infrastructure.Data.SeedDb
 				Date = DateTime.Now,
 				Status = "Pending",
 				UserId = GuestUser.Id,
-				BasketItemIds = "14"
+				BasketItemIds = "1"
 			};
 		}
 

@@ -4,6 +4,7 @@ using BakeryApp2024.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BakeryApp2024.Infrastructure.Migrations
 {
     [DbContext(typeof(BakeryAppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240417145712_SeedBasketItemImproved")]
+    partial class SeedBasketItemImproved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +103,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ad0821b0-14da-46c9-9562-0aa35c3a2687",
+                            ConcurrencyStamp = "fb46fa65-6eae-4948-b475-a6928453849a",
                             Email = "baker@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Baker",
@@ -109,9 +111,9 @@ namespace BakeryApp2024.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "baker@mail.com",
                             NormalizedUserName = "baker@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBBgAirT1j8SrgsUUp7KAAjdI/wMkdmBh4ZHxiwUvCY1m9d8QzYpadUna2mUVXnTqQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOqgl6+UlvtsHeXfBjYJRC0qGxphHzM1ddue23S+xhVIz7L41pzZ706NNrZnmI5Dlw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "90958a3e-c4fd-4400-bb18-d6eefa3298d6",
+                            SecurityStamp = "64142e83-ebe9-4bdb-8a42-8ba469adb8c1",
                             TwoFactorEnabled = false,
                             UserName = "baker@mail.com"
                         },
@@ -119,7 +121,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a7f2c52-f546-409d-912e-7038391cab4f",
+                            ConcurrencyStamp = "86737ae8-6c1d-4ab4-ad27-3c9a534d8cb8",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Guest",
@@ -127,9 +129,9 @@ namespace BakeryApp2024.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAlIBLShPhvb+tGPv0BAuDwFcTfyXYH2RbqOkVRKnw02u6laY6SDVmWZ1JoQBJUmBw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDV5RZqTp/n0fWVirp146sejcHtHSFmkCt3vBZNjE0SHBNJb5mJprT0/sNTFQW000A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "aabc30ea-80c2-4556-b033-5715968124b3",
+                            SecurityStamp = "b345fe76-6b32-4ee4-80f7-2d39d90d2ff2",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -137,7 +139,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         {
                             Id = "b4c615e6-d99c-480f-b6c7-9f95a0c7dd06",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ad7f2bce-af96-4cbd-9c64-5e3d7d3b70c4",
+                            ConcurrencyStamp = "160c24bc-5eb9-40fa-915a-2a1dfc05b951",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Great",
@@ -145,9 +147,9 @@ namespace BakeryApp2024.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEQvi5wBn08XQhRGXPA064gBbfCkRXp3fuPO4P8Y25kG8xVFBAGaulMRPMMMGeLRkQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECIYgw7OHvF0fmZqe9o85A9zIuCgbgnZkFh14E5f9Pair54/RdJTYDJ1zDzXnASsLQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bef35803-37d0-4d95-b5af-9de4c740ae6b",
+                            SecurityStamp = "d0a777f5-fa33-410f-a903-784a2e570591",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -389,13 +391,13 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            BasketItemIds = "1",
+                            BasketItemIds = "14",
                             City = "Pleven",
                             Country = "Bulgaria",
                             CustomerAddress = "Tsar Simeon 123",
                             CustomerEmail = "gabrielmar284@mail.com",
                             CustomerName = "Gabriel Marinov",
-                            Date = new DateTime(2024, 4, 17, 17, 59, 20, 394, DateTimeKind.Local).AddTicks(9979),
+                            Date = new DateTime(2024, 4, 17, 17, 57, 11, 246, DateTimeKind.Local).AddTicks(3189),
                             Number = 123456789,
                             Status = "Pending",
                             TotalPrice = 7.00m,
@@ -541,7 +543,7 @@ namespace BakeryApp2024.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2024, 4, 17, 17, 59, 20, 404, DateTimeKind.Local).AddTicks(9755),
+                            Date = new DateTime(2024, 4, 17, 17, 57, 11, 261, DateTimeKind.Local).AddTicks(2714),
                             Description = "The best bakery in the city!! Highly recommend!",
                             Stars = 5,
                             UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",

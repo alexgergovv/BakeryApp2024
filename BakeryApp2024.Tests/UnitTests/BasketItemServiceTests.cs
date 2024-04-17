@@ -27,7 +27,7 @@ namespace BakeryApp2024.Tests.UnitTests
             applicationDbContext.Database.EnsureCreated();
         }
 
-        //We already have 1 basketItem into  the database
+        //We already have 2 basketItem into  the database
         [Test]
         public async Task TestDeleteItemsByUserId()
         {
@@ -38,7 +38,7 @@ namespace BakeryApp2024.Tests.UnitTests
                 .Where(b => b.IsDeleted == false)
                 .ToListAsync();
 
-            Assert.That(items.Count, Is.EqualTo(1));
+            Assert.That(items.Count, Is.EqualTo(2));
 
             var user = await repository.AllReadOnly<ApplicationUser>()
                 .Where(u => u.FirstName == "Guest")
@@ -122,14 +122,14 @@ namespace BakeryApp2024.Tests.UnitTests
                 .FirstAsync();
 
             Assert.That(item, Is.Not.Null);
-            Assert.That(count, Is.EqualTo(1));
+            Assert.That(count, Is.EqualTo(2));
             await basketItemService.DeleteAsync(item.Id);
 
             count = await repository.AllReadOnly<BasketItem>()
                  .Where(b => b.IsDeleted == false)
                 .CountAsync();
 
-            Assert.That(count, Is.EqualTo(0));
+            Assert.That(count, Is.EqualTo(1));
         }
 
         [Test]
@@ -138,7 +138,7 @@ namespace BakeryApp2024.Tests.UnitTests
             var repository = new Repository(applicationDbContext);
             basketItemService = new BasketItemService(repository);
 
-            Assert.That(await basketItemService.ExistsAsync(14), Is.True);
+            Assert.That(await basketItemService.ExistsAsync(2), Is.True);
         }
 
         [Test]
@@ -155,11 +155,11 @@ namespace BakeryApp2024.Tests.UnitTests
             .Where(u => u.FirstName == "Guest")
             .FirstAsync();
 
-            Assert.That(await repository.AllReadOnly<BasketItem>().CountAsync(), Is.EqualTo(1));
+            Assert.That(await repository.AllReadOnly<BasketItem>().CountAsync(), Is.EqualTo(2));
 
             await basketItemService.AddItemAsync(product, user.Id);
 
-            Assert.That(await repository.AllReadOnly<BasketItem>().CountAsync(), Is.EqualTo(2));
+            Assert.That(await repository.AllReadOnly<BasketItem>().CountAsync(), Is.EqualTo(3));
         }
 
         [Test]
@@ -173,7 +173,7 @@ namespace BakeryApp2024.Tests.UnitTests
           .FirstAsync();
 
             var item = await repository.AllReadOnly<BasketItem>()
-                .Where(i => i.UserId == user.Id && i.IsDeleted == false && i.Id == 14)
+                .Where(i => i.UserId == user.Id && i.IsDeleted == false && i.Id == 1)
                 .FirstAsync();
 
             Assert.That(await basketItemService.ProductItemExistsByIdAsync(item.ProductId, user.Id), Is.True);
@@ -192,7 +192,7 @@ namespace BakeryApp2024.Tests.UnitTests
           .FirstAsync();
 
             var item = await repository.AllReadOnly<BasketItem>()
-               .Where(i => i.UserId == user.Id && i.IsDeleted == false && i.Id == 14)
+               .Where(i => i.UserId == user.Id && i.IsDeleted == false && i.Id == 1)
                .FirstAsync();
 
             var basketItem = await basketItemService.GetByProductIdAsync(item.ProductId, user.Id);
@@ -213,7 +213,7 @@ namespace BakeryApp2024.Tests.UnitTests
 
             var items = await basketItemService.MineByUserIdAsync(user.Id);
 
-            Assert.That(items.Count, Is.EqualTo(1));
+            Assert.That(items.Count, Is.EqualTo(2));
         }
 
         [TearDown]
