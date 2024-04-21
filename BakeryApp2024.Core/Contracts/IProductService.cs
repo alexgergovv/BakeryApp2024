@@ -41,7 +41,7 @@ namespace BakeryApp2024.Core.Contracts
 
         Task<IEnumerable<ProductServiceModel>> AllProductsByBakerIdAsync(int bakerId);
 
-        Task<IEnumerable<ProductServiceModel>> GetUnApprovedAsync();
+        Task<IEnumerable<ProductApproveModel>> GetUnApprovedAsync();
 
         Task ApproveProductAsync(int productId);
     }

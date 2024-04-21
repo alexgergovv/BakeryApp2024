@@ -197,16 +197,17 @@ namespace BakeryApp2024.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<ProductServiceModel>> GetUnApprovedAsync()
+        public async Task<IEnumerable<ProductApproveModel>> GetUnApprovedAsync()
         {
             return await repository.AllReadOnly<Product>()
                 .Where(p => p.IsApproved == false)
-                .Select(p => new ProductServiceModel()
+                .Select(p => new ProductApproveModel()
                 {
                     Id = p.Id,
                     ImageUrl = p.ImageUrl,
                     Price = p.Price,
                     Name = p.Name,
+                    Description = p.Description
                 })
                 .ToListAsync();
         }
@@ -221,7 +222,7 @@ namespace BakeryApp2024.Core.Services
         public async Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id)
         {
             return await repository.AllReadOnly<Product>()
-                 .Where(p => p.Id == id && p.IsApproved)
+                 .Where(p => p.Id == id)
                  .Select(p => new ProductDetailsServiceModel()
                  {
                      Id = id,
