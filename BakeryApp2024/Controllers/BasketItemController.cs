@@ -42,7 +42,7 @@ namespace BakeryApp2024.Controllers
 		{
             if (await basketItemService.ExistsAsync(id) == false)
             {
-                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+                return RedirectToAction("Error", "Home", new { statusCode = 404 });
             }
 
 			var model = await basketItemService.GetItemFormModelByIdAsync(id);
@@ -55,7 +55,7 @@ namespace BakeryApp2024.Controllers
 		{
 			if (await basketItemService.ExistsAsync(id) == false)
 			{
-				return RedirectToAction("Error", "Home", new { statusCode = 400 });
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
             await basketItemService.EditAsync(id, model);

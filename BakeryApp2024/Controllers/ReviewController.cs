@@ -17,7 +17,12 @@ namespace BakeryApp2024.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Add()
 		{
-			var model = new ReviewFormModel();
+            if (User.IsAdmin())
+            {
+                return RedirectToAction("Error", "Home", new { statusCode = 500 });
+            }
+
+            var model = new ReviewFormModel();
 
 			return View(model);
 		}
@@ -25,7 +30,12 @@ namespace BakeryApp2024.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Add(ReviewFormModel model)
 		{
-			await reviewService.CreateAsync(model, User.Id());
+			if (User.IsAdmin())
+			{
+                return RedirectToAction("Error", "Home", new { statusCode = 500 });
+            }
+
+            await reviewService.CreateAsync(model, User.Id());
 
 			return RedirectToAction(nameof(All));
 		}

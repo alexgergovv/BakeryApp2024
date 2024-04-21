@@ -40,14 +40,14 @@ namespace BakeryApp2024.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int statusCode)
         {
-            if (statusCode == 400)
+            if (statusCode == 404)
             {
-                return View("Error400");
+                return View("Error404");
             }
 
-            if (statusCode == 401)
+            if (statusCode == 500)
             {
-                return View("Error401");
+                return View("Error500");
             }
 
             return View();

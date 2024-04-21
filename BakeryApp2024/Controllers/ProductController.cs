@@ -75,14 +75,14 @@ namespace BakeryApp2024.Controllers
 		{
 			if (await productService.ExistsAsync(id) == false)
 			{
-                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+                return RedirectToAction("Error", "Home", new { statusCode = 404 });
             }
 
 			var model = await productService.ProductDetailsByIdAsync(id);
 
 			if (information != model.GetName())
 			{
-				return RedirectToAction("Error", "Home", new { statusCode = 400 });
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
 			return View(model);
@@ -93,13 +93,13 @@ namespace BakeryApp2024.Controllers
 		{
 			if (await productService.ExistsAsync(id) == false)
 			{
-				return RedirectToAction("Error", "Home", new { statusCode = 400 });
+				return RedirectToAction("Error", "Home", new { statusCode = 404 });
 			}
 
 			if (await bakerService.ExistsByIdAsync(User.Id())  
 				&& User.IsAdmin() == false)
 			{
-				return RedirectToAction("Error", "Home", new { statusCode = 401 });
+				return RedirectToAction("Error", "Home", new { statusCode = 500 });
 			}
 
 			var product = await productService.GetByIdAsync(id);
@@ -159,13 +159,13 @@ namespace BakeryApp2024.Controllers
 		{
 			if (await productService.ExistsAsync(id) == false)
 			{
-                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+                return RedirectToAction("Error", "Home", new { statusCode = 404 });
             }
 
 			if (await productService.HasBakerWithIdAsync(id, User.Id()) == false
 				&& User.IsAdmin() == false)
 			{
-                return RedirectToAction("Error", "Home", new { statusCode = 401 });
+                return RedirectToAction("Error", "Home", new { statusCode = 500 });
             }
 
 			var model = await productService.GetProductFormModelByIdAsync(id);
@@ -178,13 +178,13 @@ namespace BakeryApp2024.Controllers
 		{
 			if (await productService.ExistsAsync(id) == false)
 			{
-                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+                return RedirectToAction("Error", "Home", new { statusCode = 404 });
             }
 
 			if (await productService.HasBakerWithIdAsync(id, User.Id()) == false
 				&& User.IsAdmin() == false)
 			{
-                return RedirectToAction("Error", "Home", new { statusCode = 401 });
+                return RedirectToAction("Error", "Home", new { statusCode = 500 });
             }
 
 			if (await productService.CategoryExistsAsync(model.CategoryId) == false)
@@ -210,13 +210,13 @@ namespace BakeryApp2024.Controllers
 		{
             if (await productService.ExistsAsync(id) == false)
             {
-                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+                return RedirectToAction("Error", "Home", new { statusCode = 404 });
             }
 
             if (await productService.HasBakerWithIdAsync(id, User.Id()) == false
 				&& User.IsAdmin() == false)
             {
-				return RedirectToAction("Error", "Home", new { statusCode = 401 });
+				return RedirectToAction("Error", "Home", new { statusCode = 500 });
             }
 
 			var product = await productService.ProductDetailsByIdAsync(id);
@@ -237,13 +237,13 @@ namespace BakeryApp2024.Controllers
 		{
             if (await productService.ExistsAsync(model.Id) == false)
             {
-                return RedirectToAction("Error", "Home", new { statusCode = 400 });
+                return RedirectToAction("Error", "Home", new { statusCode = 404 });
             }
 
             if (await productService.HasBakerWithIdAsync(model.Id, User.Id()) == false
 				&& User.IsAdmin() == false)
             {
-                return RedirectToAction("Error", "Home", new { statusCode = 401 });
+                return RedirectToAction("Error", "Home", new { statusCode = 500 });
             }
 
 			await productService.DeleteAsync(model.Id);
