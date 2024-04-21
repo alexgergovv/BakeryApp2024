@@ -50,5 +50,16 @@
 
         public const int ReviewerNameMaxLength = 40;
         public const int ReviewerNameMinLength = 4;
+
+        public const int NameOnCardMaxLength = 25;
+        public const int NameOnCardMinLength = 3;
+		public const int CardNumberMaxLength = 19;
+		public const int CardNumberMinLength = 19;
+		public const int CardExpirationMonthMaxValue = 12;
+		public const int CardExpirationMonthMinValue = 1;
+		public const int CardExpirationYearMaxValue = 2100;
+		public const int CardExpirationYearMinValue = 2024;
+		public const int CardCVVMaxLength = 3;
+		public const int CardCVVMinLength = 3;
 	}
 }

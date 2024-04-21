@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="col-50">
 			<h3>Billing Address</h3>
-			
+
 			<label asp-for="CustomerName"><i class="fa fa-user"></i> Full Name</label>
 			<input asp-for="CustomerName" class="form-control" type="text" placeholder="Victor Petrov">
 			<span asp-validation-for="CustomerName" class="small text-danger"></span>
@@ -52,9 +52,12 @@
 				<i class="fa fa-cc-mastercard" style="color:red;"></i>
 				<i class="fa fa-cc-discover" style="color:orange;"></i>
 			</div>
-			<label for="cname">Name on Card</label>
-			<input type="text" id="cname" name="cardname" placeholder="John More Doe">
-			<label for="ccnum">
+			<label asp-for="NameOnCard">Name on Card</label>
+			<div>
+				<input asp-for="NameOnCard" class="form-control" type="text" placeholder="John More Doe">
+				<span asp-validation-for="NameOnCard" class="small text-danger"></span>
+			</div>
+			<label asp-for="CardNumber">
 				<i class="bi bi-credit-card-2-back">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
 						<path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5z" />
@@ -62,18 +65,25 @@
 					</svg>
 				</i>Credit card number
 			</label>
-			<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-			<label for="expmonth">Exp Month</label>
-			<input type="text" id="expmonth" name="expmonth" placeholder="September">
-
+			<div>
+				<input asp-for="CardNumber" class="form-control" type="text" placeholder="1111-2222-3333-4444">
+				<span asp-validation-for="CardNumber" class="small text-danger"></span>
+			</div>
+			<label asp-for="ExpirationMonth">Exp Month</label>
+			<div>
+				<input asp-for="ExpirationMonth" class="form-control" type="text" placeholder="12">
+				<span asp-validation-for="ExpirationMonth" class="small text-danger"></span>
+			</div>
 			<div class="row">
 				<div class="col-50">
-					<label for="expyear">Exp Year</label>
-					<input type="text" id="expyear" name="expyear" placeholder="2018">
+					<label asp-for="ExpirationYear">Exp Year</label>
+					<input asp-for="ExpirationYear" class="form-control" type="text" placeholder="2024">
+					<span asp-validation-for="ExpirationYear" class="small text-danger"></span>
 				</div>
 				<div class="col-50">
-					<label for="cvv">CVV</label>
-					<input type="text" id="cvv" name="cvv" placeholder="352">
+					<label asp-for="CVV">CVV</label>
+					<input asp-for="CVV" class="form-control" type="text" placeholder="352">
+					<span asp-validation-for="CVV" class="small text-danger"></span>
 				</div>
 			</div>
 		</div>
