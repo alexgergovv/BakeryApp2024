@@ -22,24 +22,21 @@
 &#x25E6; check product statistics;<br>
 
  ## ⚒️ Built With<br>
-* ASP.NET Core 3.1<br>
-* Entity Framework (EF) Core 3.1<br>
+* ASP.NET Core<br>
+* Entity Framework (EF) Core<br>
 * Microsoft SQL Server Express<br>
 * ASP.NET Identity System<br>
 * MVC Areas with Multiple Layouts<br>
 * Razor Pages, Sections, Partial Views<br>
 * View Components<br>
-* Repository Pattern<br>
 * Dependency Injection<br>
 * Status Code Pages Middleware<br>
 * Exception Handling Middleware<br>
 * Sorting, Filtering, and Paging with EF Core<br>
 * Data Validation, both Client-side and Server-side<br>
 * Data Validation in the Models and Input View Models<br>
-* Custom Validation Attributes<br>
 * Responsive Design<br>
 * Bootstrap<br>
-* jQuery<br>
 
  ## ⚙️ Application Configurations<br>
 1. The Connection string<br>
